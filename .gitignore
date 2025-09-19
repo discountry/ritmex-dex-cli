@@ -1,0 +1,23 @@
+# Dependencies and lockfiles
+node_modules/
+bun.lock
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Build artefacts
+build/
+dist/
+.tmp/
+*.log
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Environment overrides
+.env
+.env.*
+*.local

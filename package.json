@@ -1,0 +1,23 @@
+{
+  "name": "ritmex-dex-cli",
+  "module": "index.tsx",
+  "type": "module",
+  "private": true,
+  "imports": {
+    "ink-table": "./src/components/InkTable.tsx"
+  },
+  "scripts": {
+    "start": "bun run index.tsx"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "ink": "^6.3.1",
+    "ink-table": "^3.1.0",
+    "react": "^19.1.1"
+  }
+}

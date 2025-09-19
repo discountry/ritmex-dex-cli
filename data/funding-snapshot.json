@@ -1,0 +1,645 @@
+{
+  "rows": [
+    {
+      "contractId": "10000001",
+      "symbol": "BTC",
+      "contractName": "BTCUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": -0.0000192,
+      "arb": 0.00011519999999999998
+    },
+    {
+      "contractId": "10000002",
+      "symbol": "ETH",
+      "contractName": "ETHUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": -0.00003869,
+      "arb": 0.00013468999999999997
+    },
+    {
+      "contractId": "10000003",
+      "symbol": "SOL",
+      "contractName": "SOLUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000052",
+      "symbol": "TRUMP",
+      "contractName": "TRUMPUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": -0.000624,
+      "edgexFunding": 0.00005,
+      "arb": -0.000674
+    },
+    {
+      "contractId": "10000053",
+      "symbol": "TRX",
+      "contractName": "TRXUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": -0.000016,
+      "edgexFunding": 0.00005,
+      "arb": -0.000066
+    },
+    {
+      "contractId": "10000054",
+      "symbol": "LINK",
+      "contractName": "LINKUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000055",
+      "symbol": "LTC",
+      "contractName": "LTCUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000056",
+      "symbol": "CRV",
+      "contractName": "CRVUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000057",
+      "symbol": "ARB",
+      "contractName": "ARBUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": -0.000656,
+      "edgexFunding": 0.00005,
+      "arb": -0.000706
+    },
+    {
+      "contractId": "10000058",
+      "symbol": "OP",
+      "contractName": "OPUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000059",
+      "symbol": "ENA",
+      "contractName": "ENAUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000060",
+      "symbol": "1000SHIB",
+      "contractName": "1000SHIBUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0,
+      "edgexFunding": 0.00005,
+      "arb": -0.00005
+    },
+    {
+      "contractId": "10000061",
+      "symbol": "1000BONK",
+      "contractName": "1000BONKUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000062",
+      "symbol": "JUP",
+      "contractName": "JUPUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000063",
+      "symbol": "BERA",
+      "contractName": "BERAUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": -0.000496,
+      "edgexFunding": 0.00005,
+      "arb": -0.000546
+    },
+    {
+      "contractId": "10000064",
+      "symbol": "BNB",
+      "contractName": "BNBUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00008434,
+      "arb": 0.000011659999999999993
+    },
+    {
+      "contractId": "10000065",
+      "symbol": "AVAX",
+      "contractName": "AVAXUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000066",
+      "symbol": "XRP",
+      "contractName": "XRPUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00000753,
+      "arb": 0.00008846999999999998
+    },
+    {
+      "contractId": "10000067",
+      "symbol": "DOGE",
+      "contractName": "DOGEUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000068",
+      "symbol": "SUI",
+      "contractName": "SUIUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000069",
+      "symbol": "UNI",
+      "contractName": "UNIUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000070",
+      "symbol": "ADA",
+      "contractName": "ADAUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000071",
+      "symbol": "KAITO",
+      "contractName": "KAITOUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": -0.000832,
+      "edgexFunding": -0.00040953,
+      "arb": -0.00042246999999999993
+    },
+    {
+      "contractId": "10000072",
+      "symbol": "HYPE",
+      "contractName": "HYPEUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00021113,
+      "arb": -0.00011513
+    },
+    {
+      "contractId": "10000073",
+      "symbol": "ONDO",
+      "contractName": "ONDOUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000074",
+      "symbol": "APT",
+      "contractName": "APTUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.000064,
+      "edgexFunding": 0.00005,
+      "arb": 0.000013999999999999995
+    },
+    {
+      "contractId": "10000075",
+      "symbol": "DOT",
+      "contractName": "DOTUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000076",
+      "symbol": "TON",
+      "contractName": "TONUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000077",
+      "symbol": "AAVE",
+      "contractName": "AAVEUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000079",
+      "symbol": "ETHFI",
+      "contractName": "ETHFIUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000080",
+      "symbol": "SPX",
+      "contractName": "SPXUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000081",
+      "symbol": "SEI",
+      "contractName": "SEIUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000082",
+      "symbol": "TIA",
+      "contractName": "TIAUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000083",
+      "symbol": "FARTCOIN",
+      "contractName": "FARTCOINUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000084",
+      "symbol": "WLD",
+      "contractName": "WLDUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000085",
+      "symbol": "NEAR",
+      "contractName": "NEARUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000086",
+      "symbol": "VIRTUAL",
+      "contractName": "VIRTUALUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000087",
+      "symbol": "TAO",
+      "contractName": "TAOUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000088",
+      "symbol": "WIF",
+      "contractName": "WIFUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000089",
+      "symbol": "PENGU",
+      "contractName": "PENGUUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000090",
+      "symbol": "LDO",
+      "contractName": "LDOUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000091",
+      "symbol": "1000PEPE",
+      "contractName": "1000PEPEUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000093",
+      "symbol": "IP",
+      "contractName": "IPUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.000456,
+      "edgexFunding": 0.00017659,
+      "arb": 0.00027941
+    },
+    {
+      "contractId": "10000094",
+      "symbol": "LAUNCHCOIN",
+      "contractName": "LAUNCHCOINUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000095",
+      "symbol": "PUMP",
+      "contractName": "PUMPUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00016,
+      "edgexFunding": 0.00005,
+      "arb": 0.00011000000000000002
+    },
+    {
+      "contractId": "10000098",
+      "symbol": "POPCAT",
+      "contractName": "POPCATUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000103",
+      "symbol": "PENDLE",
+      "contractName": "PENDLEUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000104",
+      "symbol": "1000FLOKI",
+      "contractName": "1000FLOKIUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000107",
+      "symbol": "EIGEN",
+      "contractName": "EIGENUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000108",
+      "symbol": "AI16Z",
+      "contractName": "AI16ZUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000164",
+      "symbol": "YZY",
+      "contractName": "YZYUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00004986,
+      "arb": 0.00004613999999999999
+    },
+    {
+      "contractId": "10000166",
+      "symbol": "AVNT",
+      "contractName": "AVNTUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.000288,
+      "edgexFunding": 0.00005,
+      "arb": 0.000238
+    },
+    {
+      "contractId": "10000168",
+      "symbol": "XPL",
+      "contractName": "XPLUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.0015359999999999998,
+      "edgexFunding": 0.00005,
+      "arb": 0.001486
+    },
+    {
+      "contractId": "10000169",
+      "symbol": "ASTER",
+      "contractName": "ASTERUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.0046960000000000005,
+      "edgexFunding": 0.00005,
+      "arb": 0.004646000000000001
+    },
+    {
+      "contractId": "10000194",
+      "symbol": "LINEA",
+      "contractName": "LINEAUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000214",
+      "symbol": "RESOLV",
+      "contractName": "RESOLVUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": -0.000424,
+      "edgexFunding": 0.00003323,
+      "arb": -0.00045723
+    },
+    {
+      "contractId": "10000215",
+      "symbol": "GRASS",
+      "contractName": "GRASSUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000216",
+      "symbol": "ZORA",
+      "contractName": "ZORAUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": -0.00000307,
+      "arb": 0.00009906999999999998
+    },
+    {
+      "contractId": "10000217",
+      "symbol": "ZK",
+      "contractName": "ZKUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00005,
+      "arb": 0.000045999999999999986
+    },
+    {
+      "contractId": "10000220",
+      "symbol": "WLFI",
+      "contractName": "WLFIUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00007896,
+      "arb": 0.000017039999999999986
+    },
+    {
+      "contractId": "10000221",
+      "symbol": "BCH",
+      "contractName": "BCHUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00004434,
+      "arb": 0.00005165999999999999
+    },
+    {
+      "contractId": "10000222",
+      "symbol": "XMR",
+      "contractName": "XMRUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00115025,
+      "arb": -0.00105425
+    },
+    {
+      "contractId": "10000227",
+      "symbol": "PAXG",
+      "contractName": "PAXGUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": 0.000448,
+      "edgexFunding": 0.00005,
+      "arb": 0.00039799999999999997
+    },
+    {
+      "contractId": "10000228",
+      "symbol": "PYTH",
+      "contractName": "PYTHUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "lighterFunding": -0.00032,
+      "edgexFunding": 0.00005,
+      "arb": -0.00037000000000000005
+    }
+  ],
+  "lastUpdated": "2025-09-19T15:35:18.711Z"
+}
