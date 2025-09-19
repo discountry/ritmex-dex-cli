@@ -12,16 +12,21 @@ export const parseNumber = (value: string | number | undefined | null): number |
   return null;
 };
 
-export const formatRateValue = (value: number | undefined): string => {
+const formatPercentWithSign = (value: number | undefined): string => {
   if (value === undefined || !Number.isFinite(value)) {
     return "--";
   }
-  return value.toFixed(6);
+
+  const percent = value * 100;
+  const formatted = percent.toFixed(4);
+
+  if (percent > 0) {
+    return `+${formatted}%`;
+  }
+
+  return `${formatted}%`;
 };
 
-export const formatArbValue = (value: number | undefined): string => {
-  if (value === undefined || !Number.isFinite(value)) {
-    return "--";
-  }
-  return value >= 0 ? `+${value.toFixed(6)}` : value.toFixed(6);
-};
+export const formatRateValue = (value: number | undefined): string => formatPercentWithSign(value);
+
+export const formatArbValue = (value: number | undefined): string => formatPercentWithSign(value);

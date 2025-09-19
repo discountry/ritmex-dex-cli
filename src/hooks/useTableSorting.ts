@@ -41,7 +41,17 @@ export const useTableSorting = (rows: TableRow[], headers: HeaderConfig[]): Tabl
   const [selectedHeaderIndex, setSelectedHeaderIndex] = useState<number>(headers.length - 1);
 
   const sortedRows = useMemo(() => {
-    return [...rows].sort((a, b) => compareRows(a, b, sortState.key, sortState.direction));
+    const sorted = [...rows].sort((a, b) => compareRows(a, b, sortState.key, sortState.direction));
+
+    if (sortState.key === "arb") {
+      sorted.sort((a, b) => {
+        const aValue = a.arb ?? 0;
+        const bValue = b.arb ?? 0;
+        return Math.abs(bValue) - Math.abs(aValue);
+      });
+    }
+
+    return sorted;
   }, [rows, sortState]);
 
   const selectPrevious = () => {
@@ -58,9 +68,14 @@ export const useTableSorting = (rows: TableRow[], headers: HeaderConfig[]): Tabl
 
     setSelectedHeaderIndex(index);
     setSortState((prev) => {
+      if (header.key === "arb") {
+        return { key: "arb", direction: "desc" };
+      }
+
       if (prev.key === header.key) {
         return { key: prev.key, direction: prev.direction === "asc" ? "desc" : "asc" };
       }
+
       return { key: header.key, direction: "desc" };
     });
   };

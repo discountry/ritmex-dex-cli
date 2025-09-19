@@ -2,19 +2,17 @@ import React, { useMemo } from "react";
 import { render, Box, Text } from "ink";
 import { Header } from "./src/components/Header";
 import { FundingTable } from "./src/components/FundingTable";
-import { Footer } from "./src/components/Footer";
 import { useMetadata } from "./src/hooks/useMetadata";
 import { useLighterFunding } from "./src/hooks/useLighterFunding";
 import { useEdgexFunding } from "./src/hooks/useEdgexFunding";
 import { useFundingRows } from "./src/hooks/useFundingRows";
 import { useTableSorting, type HeaderConfig } from "./src/hooks/useTableSorting";
-import { usePagination } from "./src/hooks/usePagination";
 import { useKeyboardNavigation } from "./src/hooks/useKeyboardNavigation";
 import { useVisibleEdgexRefresh } from "./src/hooks/useVisibleEdgexRefresh";
 import { useSnapshotPersistence } from "./src/hooks/useSnapshotPersistence";
 import { buildColumnLabels, buildDisplayRow } from "./src/utils/table";
 import { loadSnapshotSync } from "./src/utils/snapshot";
-import { ROWS_PER_PAGE } from "./src/utils/constants";
+import { DISPLAY_LIMIT } from "./src/utils/constants";
 import type { DisplayRow, SortKey } from "./src/types/table";
 
 const SNAPSHOT = loadSnapshotSync();
@@ -46,11 +44,14 @@ const App: React.FC = () => {
   useSnapshotPersistence(rows, lastUpdated);
 
   const sorting = useTableSorting(rows, HEADERS);
-  const pagination = usePagination(sorting.sortedRows, { rowsPerPage: ROWS_PER_PAGE });
+  const limitedRows = useMemo(
+    () => sorting.sortedRows.slice(0, DISPLAY_LIMIT),
+    [sorting.sortedRows]
+  );
 
   const tableData: DisplayRow[] = useMemo(
-    () => pagination.visibleRows.map((row) => buildDisplayRow(row, DISPLAY_COLUMNS)),
-    [pagination.visibleRows]
+    () => limitedRows.map((row) => buildDisplayRow(row, DISPLAY_COLUMNS)),
+    [limitedRows]
   );
 
   const columnLabels = useMemo(
@@ -73,7 +74,7 @@ const App: React.FC = () => {
 
   useVisibleEdgexRefresh({
     contracts: metadata.contracts,
-    visibleRows: pagination.visibleRows,
+    visibleRows: limitedRows,
     refreshContracts: edgex.refreshContracts,
     fetchTimestampsRef: edgex.fetchTimestampsRef,
   });
@@ -84,15 +85,9 @@ const App: React.FC = () => {
     selectNext: sorting.selectNext,
     selectPrevious: sorting.selectPrevious,
     toggleSort: sorting.toggleSort,
-    increment: pagination.increment,
-    decrement: pagination.decrement,
-    pageUp: pagination.pageUp,
-    pageDown: pagination.pageDown,
   });
 
-  const totalRows = sorting.sortedRows.length;
-  const startRow = tableData.length ? pagination.viewportOffset + 1 : 0;
-  const endRow = pagination.viewportOffset + tableData.length;
+  const totalRows = limitedRows.length;
   const fundingError = edgex.error ?? lighter.error ?? null;
 
   const hasContracts = metadata.contracts.length > 0;
@@ -129,18 +124,17 @@ const App: React.FC = () => {
     <Box flexDirection="column">
       <Header
         title="Ritmex Funding Monitor"
-        instructions="Use ← → or press 1-4 to choose a column, Enter to toggle sort, ↑/↓ to scroll rows, PgUp/PgDn to jump."
+        instructions="Use ← → or press 1-4 to choose a column, Enter to toggle sort."
         lastUpdated={lastUpdated}
         metadataError={metadata.error}
         fundingError={fundingError}
-        statusMessage={statusMessage}
       />
 
       <FundingTable data={tableData} columns={DISPLAY_COLUMNS} columnLabels={columnLabels} headerStyles={headerStyles} />
 
       {!totalRows && !statusMessage && <Text color="gray">No data available. Waiting for next refresh…</Text>}
 
-      {totalRows > ROWS_PER_PAGE && <Footer totalRows={totalRows} startRow={startRow} endRow={endRow} />}
+      {statusMessage && <Text color="yellow">{statusMessage}</Text>}
     </Box>
   );
 };

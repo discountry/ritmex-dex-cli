@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { fetchEdgexFundingPoint } from "../services/http/edgex";
 import { delay } from "../utils/time";
-import { EDGEX_CYCLE_MS, FETCH_GAP_MS } from "../utils/constants";
+import { EDGEX_CYCLE_MS, EDGEX_TOP_REFRESH_MS, FETCH_GAP_MS } from "../utils/constants";
 import type { EdgexMetaContract, EnrichedFundingPoint } from "../types/edgex";
 
 export type RefreshScope = "idle" | "full" | "partial";
@@ -94,29 +94,37 @@ export const useEdgexFunding = (contracts: EdgexMetaContract[]): EdgexFundingSta
     if (!contracts.length) return;
 
     let cancelled = false;
-    let timeoutId: NodeJS.Timeout | null = null;
+    let hourlyTimeout: NodeJS.Timeout | null = null;
+    let topInterval: NodeJS.Timeout | null = null;
 
-    const scheduleNextCycle = (delayMs: number) => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+    const scheduleHourlyCycle = (delayMs: number) => {
+      if (hourlyTimeout) {
+        clearTimeout(hourlyTimeout);
       }
 
-      timeoutId = setTimeout(async () => {
+      hourlyTimeout = setTimeout(async () => {
         if (cancelled) return;
         await pull();
         if (!cancelled) {
-          scheduleNextCycle(EDGEX_CYCLE_MS);
+          scheduleHourlyCycle(EDGEX_CYCLE_MS);
         }
       }, delayMs);
     };
 
     void pull();
-    scheduleNextCycle(getMsUntilNextHour());
+    scheduleHourlyCycle(getMsUntilNextHour());
+
+    topInterval = setInterval(() => {
+      void pull();
+    }, EDGEX_TOP_REFRESH_MS);
 
     return () => {
       cancelled = true;
-      if (timeoutId) {
-        clearTimeout(timeoutId);
+      if (hourlyTimeout) {
+        clearTimeout(hourlyTimeout);
+      }
+      if (topInterval) {
+        clearInterval(topInterval);
       }
     };
   }, [contracts, pull]);

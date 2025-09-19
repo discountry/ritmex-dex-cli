@@ -7,7 +7,6 @@ interface HeaderProps {
   lastUpdated: Date | null;
   metadataError: string | null;
   fundingError: string | null;
-  statusMessage: string;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -16,7 +15,6 @@ export const Header: React.FC<HeaderProps> = ({
   lastUpdated,
   metadataError,
   fundingError,
-  statusMessage,
 }) => (
   <Box marginBottom={1} flexDirection="column">
     <Text>{title}</Text>
@@ -24,6 +22,5 @@ export const Header: React.FC<HeaderProps> = ({
     {lastUpdated && <Text color="gray">Last update: {lastUpdated.toLocaleTimeString()}</Text>}
     {metadataError && <Text color="red">Metadata error: {metadataError}</Text>}
     {fundingError && <Text color="red">Funding error: {fundingError}</Text>}
-    {statusMessage && <Text color="yellow">{statusMessage}</Text>}
   </Box>
 );

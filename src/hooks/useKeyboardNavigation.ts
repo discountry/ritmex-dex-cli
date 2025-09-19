@@ -7,10 +7,10 @@ interface KeyboardNavigationArgs {
   selectNext: () => void;
   selectPrevious: () => void;
   toggleSort: (index: number) => void;
-  increment: () => void;
-  decrement: () => void;
-  pageUp: () => void;
-  pageDown: () => void;
+  increment?: () => void;
+  decrement?: () => void;
+  pageUp?: () => void;
+  pageDown?: () => void;
 }
 
 export const useKeyboardNavigation = ({
@@ -25,22 +25,22 @@ export const useKeyboardNavigation = ({
   pageDown,
 }: KeyboardNavigationArgs) => {
   useInput((input, key) => {
-    if (key.upArrow) {
+    if (key.upArrow && decrement) {
       decrement();
       return;
     }
 
-    if (key.downArrow) {
+    if (key.downArrow && increment) {
       increment();
       return;
     }
 
-    if (key.pageUp) {
+    if (key.pageUp && pageUp) {
       pageUp();
       return;
     }
 
-    if (key.pageDown) {
+    if (key.pageDown && pageDown) {
       pageDown();
       return;
     }
