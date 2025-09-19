@@ -60,13 +60,17 @@ export const useEdgexFunding = (contracts: EdgexMetaContract[]): EdgexFundingSta
           if (fundingPoint) {
             const forecast = Number(fundingPoint.forecastFundingRate);
             const fallback = Number(fundingPoint.fundingRate);
-            const effectiveRate = Number.isFinite(forecast) ? forecast : fallback;
-            next[contract.contractId] = {
-              ...contract,
-              fundingRate: effectiveRate,
-              fundingRateTime: fundingPoint.fundingTime,
-            };
-            fetchTimestampsRef.current[contract.contractId] = now;
+            const fourHourRate = Number.isFinite(forecast) ? forecast : Number.isFinite(fallback) ? fallback : null;
+
+            if (fourHourRate !== null) {
+              const eightHourRate = fourHourRate * 2;
+              next[contract.contractId] = {
+                ...contract,
+                fundingRate: eightHourRate,
+                fundingRateTime: fundingPoint.fundingTime,
+              };
+              fetchTimestampsRef.current[contract.contractId] = now;
+            }
           }
         } catch (requestError) {
           lastError = (requestError as Error).message;
