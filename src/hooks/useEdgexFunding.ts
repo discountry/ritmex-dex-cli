@@ -58,9 +58,12 @@ export const useEdgexFunding = (contracts: EdgexMetaContract[]): EdgexFundingSta
         try {
           const fundingPoint = await fetchEdgexFundingPoint(contract.contractId);
           if (fundingPoint) {
+            const forecast = Number(fundingPoint.forecastFundingRate);
+            const fallback = Number(fundingPoint.fundingRate);
+            const effectiveRate = Number.isFinite(forecast) ? forecast : fallback;
             next[contract.contractId] = {
               ...contract,
-              fundingRate: Number(fundingPoint.fundingRate),
+              fundingRate: effectiveRate,
               fundingRateTime: fundingPoint.fundingTime,
             };
             fetchTimestampsRef.current[contract.contractId] = now;

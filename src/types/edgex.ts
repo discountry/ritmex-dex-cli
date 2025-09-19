@@ -18,6 +18,7 @@ export interface EdgexMetaResponse {
 export interface EdgexFundingPoint {
   contractId: string;
   fundingRate: string;
+  forecastFundingRate: string;
   fundingRateIntervalMin: string;
   fundingTime: string;
 }
