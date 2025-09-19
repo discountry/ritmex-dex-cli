@@ -1,18 +1,31 @@
 # Repository Guidelines
 
-This guide supports contributors working on the Ritmex DEX CLI. The project uses Bun as the runtime and Ink for building interactive terminal views, so align your workflows with Bun's tooling and TypeScript strict mode.
+Bun + Ink drive this CLI for monitoring exchange funding. The runtime now follows a modular layout: UI in `src/components`, orchestration hooks in `src/hooks`, HTTP clients under `src/services/http`, shared helpers inside `src/utils`, and domain contracts in `src/types`. Keep `index.tsx` as composition glue only.
 
 ## Project Structure & Module Organization
-The CLI entry point lives in `index.ts`, currently emitting placeholder output but intended to host Ink render logic. Domain data snapshots in `data/` (such as `getLatestFundingRate.json`) provide deterministic fixtures; update them whenever API shapes change. Supplementary walkthroughs belong in `docs/`, while `tsconfig.json` defines bundler-style module resolution—new source files should import modules via relative or package paths compatible with that setup.
+- `components/`: stateless Ink views (`Header`, `FundingTable`, `Footer`, `InkTable`). Accept data via props; never fetch or mutate state here.
+- `hooks/`: feature logic (`useEdgexFunding`, `useLighterFunding`, `useFundingRows`, `useTableSorting`, `useKeyboardNavigation`, etc.). Prefer composing hooks to layering conditionals inside components.
+- `services/http/`: provider-specific clients (`edgex.ts`, `lighter.ts`) that expose typed fetch functions with no caller-side caching.
+- `utils/`: cross-cutting helpers (`constants`, `format`, `table`, `time`, `snapshot`). Add new utilities here to avoid duplication.
+- `types/`: source-of-truth TypeScript models re-exported via `types/index.ts`. Update these first when API payloads shift.
+- `data/`: stores persisted funding snapshots for fast startup; regenerate whenever API shapes change.
 
 ## Build, Test, and Development Commands
-Run `bun install` after cloning to sync dependencies. `bun run index.ts` executes the CLI locally; pass any new CLI flags the same way you expect end users to do so. For static analysis, run `bunx --bun tsc --noEmit` to type-check against the strict configuration. Once tests exist, execute `bun test` (Bun’s native test runner) for fast feedback.
+- `bun install` syncs dependencies.
+- `bun start` (alias of `bun run index.tsx`) launches the Ink interface.
+- `bunx --bun tsc --noEmit` must pass before committing. Add `bun test` suites once they exist.
 
 ## Coding Style & Naming Conventions
-Use TypeScript with ESNext modules and 2-space indentation. Prefer `camelCase` for variables and functions, `PascalCase` for Ink components, and keep file names kebab-case (`wallet-details.ts`). Avoid default exports to preserve tree-shakeable imports. Leverage async/await and ensure Promise-returning helpers are typed explicitly, benefiting from `noUncheckedIndexedAccess`.
+- TypeScript ESNext modules, 2-space indent, and named exports. Avoid default exports to keep imports explicit.
+- Files use `kebab-case`. Components and hooks follow `PascalCase`/`camelCase` (`useFundingRows`). Constants live in `UPPER_SNAKE_CASE`.
+- Hooks should manage one concern, expose plain return objects, and handle async flows with `async/await` plus typed results.
+- UI components render only; pass derived strings or numbers from hooks/utilities.
 
 ## Testing Guidelines
-Place new test files alongside the code under `__tests__` folders or `*.test.ts` siblings; mock network calls with fixtures from `data/`. Structure tests around CLI behaviours rather than implementation details, and assert on rendered Ink output or stdout. Keep coverage meaningful—exercise happy paths, error handling, and data formatting.
+- Co-locate tests (e.g., `src/hooks/__tests__/useEdgexFunding.test.ts`). Stub HTTP layers; never call live exchanges.
+- Validate behaviour: refresh cadence, throttling, snapshot persistence, formatting. Cover error states alongside happy paths.
 
 ## Commit & Pull Request Guidelines
-No historical conventions exist yet, so adopt Conventional Commit prefixes (`feat:`, `fix:`, `chore:`) followed by an imperative summary under 72 characters. Reference related issues in the body and note any data fixture updates. Pull requests should outline the user-facing impact, attach sample CLI output when relevant, and confirm `bun run index.ts` plus type-checks/tests were executed.
+- Use Conventional Commit prefixes (`feat:`, `fix:`, `chore:`, `refactor:`) with ≤72 char imperative messages.
+- PRs should summarize the user-facing change, list touched hooks/services/utils, and paste representative CLI output when UI shifts.
+- Explicitly mention snapshot or constant updates. Confirm `bunx --bun tsc --noEmit` and a manual `bun start` run (or automated tests when available).

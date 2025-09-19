@@ -36,9 +36,9 @@
       "contractName": "TRUMPUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000624,
+      "lighterFunding": -0.000608,
       "edgexFunding": 0.00005,
-      "arb": -0.000674
+      "arb": -0.0006580000000000001
     },
     {
       "contractId": "10000053",
@@ -46,9 +46,9 @@
       "contractName": "TRXUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000016,
+      "lighterFunding": -0.000008,
       "edgexFunding": 0.00005,
-      "arb": -0.000066
+      "arb": -0.000058
     },
     {
       "contractId": "10000054",
@@ -146,9 +146,9 @@
       "contractName": "BERAUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000496,
+      "lighterFunding": -0.00052,
       "edgexFunding": 0.00005,
-      "arb": -0.000546
+      "arb": -0.00057
     },
     {
       "contractId": "10000064",
@@ -226,9 +226,9 @@
       "contractName": "KAITOUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000832,
+      "lighterFunding": -0.0008160000000000001,
       "edgexFunding": -0.00040953,
-      "arb": -0.00042246999999999993
+      "arb": -0.0004064700000000001
     },
     {
       "contractId": "10000072",
@@ -256,9 +256,9 @@
       "contractName": "APTUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.000064,
+      "lighterFunding": 0.000056,
       "edgexFunding": 0.00005,
-      "arb": 0.000013999999999999995
+      "arb": 0.000005999999999999997
     },
     {
       "contractId": "10000075",
@@ -426,9 +426,9 @@
       "contractName": "IPUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.000456,
+      "lighterFunding": 0.00038399999999999996,
       "edgexFunding": 0.00017659,
-      "arb": 0.00027941
+      "arb": 0.00020740999999999997
     },
     {
       "contractId": "10000094",
@@ -446,9 +446,9 @@
       "contractName": "PUMPUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00016,
+      "lighterFunding": 0.000248,
       "edgexFunding": 0.00005,
-      "arb": 0.00011000000000000002
+      "arb": 0.00019800000000000002
     },
     {
       "contractId": "10000098",
@@ -516,9 +516,9 @@
       "contractName": "AVNTUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.000288,
+      "lighterFunding": 0.00029600000000000004,
       "edgexFunding": 0.00005,
-      "arb": 0.000238
+      "arb": 0.000246
     },
     {
       "contractId": "10000168",
@@ -526,9 +526,9 @@
       "contractName": "XPLUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.0015359999999999998,
+      "lighterFunding": 0.001472,
       "edgexFunding": 0.00005,
-      "arb": 0.001486
+      "arb": 0.001422
     },
     {
       "contractId": "10000169",
@@ -536,9 +536,9 @@
       "contractName": "ASTERUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.0046960000000000005,
+      "lighterFunding": 0.004224,
       "edgexFunding": 0.00005,
-      "arb": 0.004646000000000001
+      "arb": 0.004174000000000001
     },
     {
       "contractId": "10000194",
@@ -626,9 +626,9 @@
       "contractName": "PAXGUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.000448,
+      "lighterFunding": 0.00040800000000000005,
       "edgexFunding": 0.00005,
-      "arb": 0.00039799999999999997
+      "arb": 0.00035800000000000003
     },
     {
       "contractId": "10000228",
@@ -636,10 +636,10 @@
       "contractName": "PYTHUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.00032,
+      "lighterFunding": -0.000256,
       "edgexFunding": 0.00005,
-      "arb": -0.00037000000000000005
+      "arb": -0.000306
     }
   ],
-  "lastUpdated": "2025-09-19T15:35:18.711Z"
+  "lastUpdated": "2025-09-19T15:40:19.534Z"
 }
