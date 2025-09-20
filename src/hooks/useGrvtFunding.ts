@@ -65,7 +65,7 @@ export const useGrvtFunding = (): GrvtFundingState => {
 
           if (value !== null && Number.isFinite(Number(value))) {
             // GRVT already returns decimal rates; do not rescale
-            next[normaliseBase(instrument)] = Number(value);
+            next[normaliseBase(instrument)] = Number(value / 100);
           }
         }
       } catch (requestError) {
