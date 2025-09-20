@@ -6,7 +6,10 @@ export interface TableRow {
   fundingInterestRate: number | null;
   lighterFunding?: number;
   edgexFunding?: number;
-  arb?: number;
+  grvtFunding?: number;
+  lighterEdgexArb?: number;
+  lighterGrvtArb?: number;
+  edgexGrvtArb?: number;
 }
 
 export interface FundingSnapshot {
@@ -14,7 +17,16 @@ export interface FundingSnapshot {
   lastUpdated: string;
 }
 
-export type SortKey = keyof Pick<TableRow, "symbol" | "lighterFunding" | "edgexFunding" | "arb">;
+export type SortKey = keyof Pick<
+  TableRow,
+  | "symbol"
+  | "lighterFunding"
+  | "edgexFunding"
+  | "grvtFunding"
+  | "lighterEdgexArb"
+  | "lighterGrvtArb"
+  | "edgexGrvtArb"
+>;
 export type SortDirection = "asc" | "desc";
 
 export interface SortState {
@@ -23,3 +35,16 @@ export interface SortState {
 }
 
 export type DisplayRow = Record<SortKey, string>;
+
+export interface SpreadEntry {
+  symbol: string;
+  diff: number;
+  high: {
+    exchange: string;
+    rate: number;
+  };
+  low: {
+    exchange: string;
+    rate: number;
+  };
+}

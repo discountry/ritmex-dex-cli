@@ -6,7 +6,8 @@ import { formatArbValue, formatRateValue, normaliseSymbol, parseNumber } from ".
 export const buildTableRows = (
   contracts: EdgexMetaContract[],
   edgexFundingById: Record<string, EnrichedFundingPoint | undefined>,
-  lighterRates: LighterFundingEntry[]
+  lighterRates: LighterFundingEntry[],
+  grvtFundingBySymbol: Record<string, number>
 ): TableRow[] => {
   const lighterMap = new Map<string, number>();
 
@@ -20,21 +21,49 @@ export const buildTableRows = (
     const lighterFunding = lighterMap.get(symbol);
     const edgexFundingPoint = edgexFundingById[contract.contractId];
     const edgexFunding = edgexFundingPoint?.fundingRate;
+    const grvtFunding = grvtFundingBySymbol[symbol];
 
-    if (lighterFunding === undefined || edgexFunding === undefined) {
+    const availableRates = [lighterFunding, edgexFunding, grvtFunding].filter(
+      (value) => value !== undefined
+    );
+
+    if (availableRates.length < 2) {
       return accumulator;
     }
 
-    accumulator.push({
+    const row: TableRow = {
       contractId: contract.contractId,
       symbol,
       contractName: contract.contractName,
       fundingRateIntervalMin: parseNumber(contract.fundingRateIntervalMin),
       fundingInterestRate: parseNumber(contract.fundingInterestRate),
-      lighterFunding,
-      edgexFunding,
-      arb: lighterFunding - edgexFunding,
-    });
+    };
+
+    if (lighterFunding !== undefined) {
+      row.lighterFunding = lighterFunding;
+    }
+
+    if (edgexFunding !== undefined) {
+      row.edgexFunding = edgexFunding;
+    }
+
+    if (grvtFunding !== undefined) {
+      row.grvtFunding = grvtFunding;
+    }
+
+    if (lighterFunding !== undefined && edgexFunding !== undefined) {
+      row.lighterEdgexArb = lighterFunding - edgexFunding;
+    }
+
+    if (lighterFunding !== undefined && grvtFunding !== undefined) {
+      row.lighterGrvtArb = lighterFunding - grvtFunding;
+    }
+
+    if (edgexFunding !== undefined && grvtFunding !== undefined) {
+      row.edgexGrvtArb = edgexFunding - grvtFunding;
+    }
+
+    accumulator.push(row);
 
     return accumulator;
   }, []);
@@ -52,8 +81,17 @@ export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow =
       case "edgexFunding":
         accumulator[column] = formatRateValue(row.edgexFunding);
         break;
-      case "arb":
-        accumulator[column] = formatArbValue(row.arb);
+      case "grvtFunding":
+        accumulator[column] = formatRateValue(row.grvtFunding);
+        break;
+      case "lighterEdgexArb":
+        accumulator[column] = formatArbValue(row.lighterEdgexArb);
+        break;
+      case "lighterGrvtArb":
+        accumulator[column] = formatArbValue(row.lighterGrvtArb);
+        break;
+      case "edgexGrvtArb":
+        accumulator[column] = formatArbValue(row.edgexGrvtArb);
         break;
       default: {
         const exhaustiveCheck: never = column;

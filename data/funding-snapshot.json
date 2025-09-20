@@ -7,8 +7,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": -0.00002362,
-      "arb": 0.00011962
+      "edgexFunding": -0.0002002,
+      "grvtFunding": 0.0124,
+      "lighterEdgexArb": 0.0002962,
+      "lighterGrvtArb": -0.012303999999999999,
+      "edgexGrvtArb": -0.012600199999999999
     },
     {
       "contractId": "10000002",
@@ -17,8 +20,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": -0.00010294,
-      "arb": 0.00019894
+      "edgexFunding": 2.4e-7,
+      "grvtFunding": 0.0086,
+      "lighterEdgexArb": 0.00009575999999999999,
+      "lighterGrvtArb": -0.008504,
+      "edgexGrvtArb": -0.00859976
     },
     {
       "contractId": "10000003",
@@ -27,8 +33,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": -0.00002902,
-      "arb": 0.00012502
+      "edgexFunding": -0.00002626,
+      "grvtFunding": -0.0055,
+      "lighterEdgexArb": 0.00012225999999999998,
+      "lighterGrvtArb": 0.005595999999999999,
+      "edgexGrvtArb": 0.0054737399999999995
     },
     {
       "contractId": "10000052",
@@ -36,9 +45,12 @@
       "contractName": "TRUMPUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000456,
+      "lighterFunding": -0.000568,
       "edgexFunding": 0.0001,
-      "arb": -0.0005560000000000001
+      "grvtFunding": -0.0611,
+      "lighterEdgexArb": -0.0006680000000000001,
+      "lighterGrvtArb": 0.060532,
+      "edgexGrvtArb": 0.061200000000000004
     },
     {
       "contractId": "10000053",
@@ -46,9 +58,9 @@
       "contractName": "TRXUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.00009792,
-      "arb": -0.0000019200000000000087
+      "lighterFunding": 0,
+      "edgexFunding": 0.0001,
+      "lighterEdgexArb": -0.0001
     },
     {
       "contractId": "10000054",
@@ -57,8 +69,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "edgexFunding": -0.00017744,
+      "grvtFunding": -0.0375,
+      "lighterEdgexArb": 0.00027344,
+      "lighterGrvtArb": 0.037596,
+      "edgexGrvtArb": 0.03732256
     },
     {
       "contractId": "10000055",
@@ -68,7 +83,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0209,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.020995999999999997,
+      "edgexGrvtArb": 0.020999999999999998
     },
     {
       "contractId": "10000056",
@@ -78,7 +96,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0483,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.048396,
+      "edgexGrvtArb": 0.048400000000000006
     },
     {
       "contractId": "10000057",
@@ -86,9 +107,12 @@
       "contractName": "ARBUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000736,
+      "lighterFunding": -0.000328,
       "edgexFunding": 0.0001,
-      "arb": -0.000836
+      "grvtFunding": -0.0371,
+      "lighterEdgexArb": -0.000428,
+      "lighterGrvtArb": 0.036772,
+      "edgexGrvtArb": 0.037200000000000004
     },
     {
       "contractId": "10000058",
@@ -96,9 +120,12 @@
       "contractName": "OPUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00009599999999999999,
+      "lighterFunding": -0.00016,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0233,
+      "lighterEdgexArb": -0.00026000000000000003,
+      "lighterGrvtArb": 0.02314,
+      "edgexGrvtArb": 0.0234
     },
     {
       "contractId": "10000059",
@@ -107,8 +134,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0000647,
-      "arb": 0.00003129999999999999
+      "edgexFunding": 0.0001,
+      "grvtFunding": -0.0606,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.060696,
+      "edgexGrvtArb": 0.060700000000000004
     },
     {
       "contractId": "10000060",
@@ -116,9 +146,9 @@
       "contractName": "1000SHIBUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.0002,
+      "lighterFunding": -0.000032,
       "edgexFunding": 0.0001,
-      "arb": -0.00030000000000000003
+      "lighterEdgexArb": -0.000132
     },
     {
       "contractId": "10000061",
@@ -127,8 +157,8 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.00009456,
-      "arb": 0.0000014399999999999862
+      "edgexFunding": 0.00003876,
+      "lighterEdgexArb": 0.00005723999999999999
     },
     {
       "contractId": "10000062",
@@ -138,7 +168,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0212,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.021296,
+      "edgexGrvtArb": 0.0213
     },
     {
       "contractId": "10000063",
@@ -146,9 +179,12 @@
       "contractName": "BERAUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000728,
+      "lighterFunding": -0.000824,
       "edgexFunding": 0.0001,
-      "arb": -0.0008280000000000001
+      "grvtFunding": -0.0433,
+      "lighterEdgexArb": -0.000924,
+      "lighterGrvtArb": 0.042476,
+      "edgexGrvtArb": 0.0434
     },
     {
       "contractId": "10000064",
@@ -158,7 +194,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": 0.0201,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": -0.020004,
+      "edgexGrvtArb": -0.02
     },
     {
       "contractId": "10000065",
@@ -167,8 +206,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "edgexFunding": -0.00002582,
+      "grvtFunding": 0.0003,
+      "lighterEdgexArb": 0.00012182,
+      "lighterGrvtArb": -0.00020399999999999997,
+      "edgexGrvtArb": -0.00032582
     },
     {
       "contractId": "10000066",
@@ -177,8 +219,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "edgexFunding": 0.00004254,
+      "grvtFunding": -0.0111,
+      "lighterEdgexArb": 0.000053459999999999986,
+      "lighterGrvtArb": 0.011196000000000001,
+      "edgexGrvtArb": 0.011142540000000001
     },
     {
       "contractId": "10000067",
@@ -188,7 +233,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0127,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.012796,
+      "edgexGrvtArb": 0.012799999999999999
     },
     {
       "contractId": "10000068",
@@ -197,8 +245,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "edgexFunding": -0.00009464,
+      "grvtFunding": -0.0212,
+      "lighterEdgexArb": 0.00019064,
+      "lighterGrvtArb": 0.021296,
+      "edgexGrvtArb": 0.02110536
     },
     {
       "contractId": "10000069",
@@ -208,7 +259,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0775,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.077596,
+      "edgexGrvtArb": 0.0776
     },
     {
       "contractId": "10000070",
@@ -218,7 +272,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0186,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.018695999999999997,
+      "edgexGrvtArb": 0.018699999999999998
     },
     {
       "contractId": "10000071",
@@ -226,9 +283,12 @@
       "contractName": "KAITOUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000504,
-      "edgexFunding": -0.00045898,
-      "arb": -0.00004502
+      "lighterFunding": -0.000984,
+      "edgexFunding": -0.00177726,
+      "grvtFunding": -0.3047,
+      "lighterEdgexArb": 0.0007932599999999998,
+      "lighterGrvtArb": 0.30371600000000004,
+      "edgexGrvtArb": 0.30292274
     },
     {
       "contractId": "10000072",
@@ -236,9 +296,12 @@
       "contractName": "HYPEUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00040800000000000005,
-      "edgexFunding": 0.0001,
-      "arb": 0.00030800000000000006
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00029826,
+      "grvtFunding": 0.0631,
+      "lighterEdgexArb": -0.00020226,
+      "lighterGrvtArb": -0.063004,
+      "edgexGrvtArb": -0.06280174000000001
     },
     {
       "contractId": "10000073",
@@ -248,7 +311,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.1665,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.16659600000000002,
+      "edgexGrvtArb": 0.1666
     },
     {
       "contractId": "10000074",
@@ -256,9 +322,9 @@
       "contractName": "APTUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000184,
-      "edgexFunding": 0.0001,
-      "arb": -0.000284
+      "lighterFunding": -0.000032,
+      "edgexFunding": -0.00000558,
+      "lighterEdgexArb": -0.000026419999999999998
     },
     {
       "contractId": "10000075",
@@ -268,7 +334,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000076",
@@ -278,7 +344,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0336,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.033696,
+      "edgexGrvtArb": 0.0337
     },
     {
       "contractId": "10000077",
@@ -287,8 +356,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "edgexFunding": -0.00008352,
+      "grvtFunding": -0.0123,
+      "lighterEdgexArb": 0.00017952,
+      "lighterGrvtArb": 0.012396,
+      "edgexGrvtArb": 0.01221648
     },
     {
       "contractId": "10000079",
@@ -298,7 +370,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000080",
@@ -308,7 +380,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000081",
@@ -318,7 +390,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0195,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.019596,
+      "edgexGrvtArb": 0.0196
     },
     {
       "contractId": "10000082",
@@ -328,7 +403,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000083",
@@ -336,9 +411,12 @@
       "contractName": "FARTCOINUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00009599999999999999,
+      "lighterFunding": 0.000504,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": 0.0223,
+      "lighterEdgexArb": 0.000404,
+      "lighterGrvtArb": -0.021796,
+      "edgexGrvtArb": -0.0222
     },
     {
       "contractId": "10000084",
@@ -346,9 +424,12 @@
       "contractName": "WLDUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterFunding": -0.000072,
+      "edgexFunding": 0.00000738,
+      "grvtFunding": -0.0258,
+      "lighterEdgexArb": -0.00007938,
+      "lighterGrvtArb": 0.025728,
+      "edgexGrvtArb": 0.02580738
     },
     {
       "contractId": "10000085",
@@ -358,7 +439,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000086",
@@ -368,7 +449,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0168,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.016895999999999998,
+      "edgexGrvtArb": 0.0169
     },
     {
       "contractId": "10000087",
@@ -378,7 +462,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000088",
@@ -388,7 +472,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0407,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.040796,
+      "edgexGrvtArb": 0.0408
     },
     {
       "contractId": "10000089",
@@ -398,7 +485,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": 0.001,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": -0.0009040000000000001,
+      "edgexGrvtArb": -0.0009
     },
     {
       "contractId": "10000090",
@@ -408,7 +498,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000091",
@@ -417,8 +507,18 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": -0.00006464,
+      "lighterEdgexArb": 0.00016063999999999998
+    },
+    {
+      "contractId": "10000092",
+      "symbol": "MOODENG",
+      "contractName": "MOODENGUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": -0.0527,
+      "edgexGrvtArb": 0.0528
     },
     {
       "contractId": "10000093",
@@ -426,9 +526,12 @@
       "contractName": "IPUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.001168,
-      "edgexFunding": 0.00123884,
-      "arb": -0.00007083999999999997
+      "lighterFunding": 0.00037600000000000003,
+      "edgexFunding": 0.0028702,
+      "grvtFunding": 0.4809,
+      "lighterEdgexArb": -0.0024942,
+      "lighterGrvtArb": -0.480524,
+      "edgexGrvtArb": -0.4780298
     },
     {
       "contractId": "10000094",
@@ -436,9 +539,9 @@
       "contractName": "LAUNCHCOINUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.0007920000000000001,
+      "lighterFunding": 0.001056,
       "edgexFunding": 0.0001,
-      "arb": 0.000692
+      "lighterEdgexArb": 0.000956
     },
     {
       "contractId": "10000095",
@@ -446,9 +549,32 @@
       "contractName": "PUMPUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.0007679999999999999,
+      "lighterFunding": 0.00048800000000000004,
       "edgexFunding": 0.0001,
-      "arb": 0.0006679999999999999
+      "grvtFunding": 0.123,
+      "lighterEdgexArb": 0.00038800000000000005,
+      "lighterGrvtArb": -0.122512,
+      "edgexGrvtArb": -0.1229
+    },
+    {
+      "contractId": "10000096",
+      "symbol": "XLM",
+      "contractName": "XLMUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "edgexFunding": 0.0001,
+      "grvtFunding": -0.0122,
+      "edgexGrvtArb": 0.0123
+    },
+    {
+      "contractId": "10000097",
+      "symbol": "ATOM",
+      "contractName": "ATOMUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "edgexFunding": 0.0001,
+      "grvtFunding": -0.0677,
+      "edgexGrvtArb": 0.0678
     },
     {
       "contractId": "10000098",
@@ -458,7 +584,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": 0.0352,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": -0.035104,
+      "edgexGrvtArb": -0.0351
     },
     {
       "contractId": "10000103",
@@ -467,8 +596,11 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.00000824,
-      "arb": 0.00008775999999999999
+      "edgexFunding": -0.00032746,
+      "grvtFunding": -0.0093,
+      "lighterEdgexArb": 0.00042346,
+      "lighterGrvtArb": 0.009396,
+      "edgexGrvtArb": 0.00897254
     },
     {
       "contractId": "10000104",
@@ -478,7 +610,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000107",
@@ -488,7 +620,7 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000108",
@@ -498,7 +630,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": 0.0267,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": -0.026604000000000003,
+      "edgexGrvtArb": -0.026600000000000002
     },
     {
       "contractId": "10000164",
@@ -506,9 +641,9 @@
       "contractName": "YZYUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000264,
+      "lighterFunding": -0.002864,
       "edgexFunding": 0.00009972,
-      "arb": -0.00036372
+      "lighterEdgexArb": -0.00296372
     },
     {
       "contractId": "10000166",
@@ -516,9 +651,9 @@
       "contractName": "AVNTUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00009599999999999999,
+      "lighterFunding": 0.000728,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterEdgexArb": 0.000628
     },
     {
       "contractId": "10000168",
@@ -526,9 +661,9 @@
       "contractName": "XPLUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.0017439999999999999,
+      "lighterFunding": 0.001328,
       "edgexFunding": 0.0001,
-      "arb": 0.0016439999999999998
+      "lighterEdgexArb": 0.001228
     },
     {
       "contractId": "10000169",
@@ -536,9 +671,9 @@
       "contractName": "ASTERUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.006752,
-      "edgexFunding": 0.00253658,
-      "arb": 0.00421542
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.00146044,
+      "lighterEdgexArb": -0.00136444
     },
     {
       "contractId": "10000194",
@@ -546,9 +681,12 @@
       "contractName": "LINEAUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00009599999999999999,
+      "lighterFunding": 0.000616,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": 0.0302,
+      "lighterEdgexArb": 0.000516,
+      "lighterGrvtArb": -0.029584000000000003,
+      "edgexGrvtArb": -0.030100000000000002
     },
     {
       "contractId": "10000214",
@@ -556,9 +694,9 @@
       "contractName": "RESOLVUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.00009599999999999999,
-      "edgexFunding": -0.000151,
-      "arb": 0.00005500000000000002
+      "lighterFunding": -0.00029600000000000004,
+      "edgexFunding": -0.00022356,
+      "lighterEdgexArb": -0.00007244000000000003
     },
     {
       "contractId": "10000215",
@@ -566,9 +704,9 @@
       "contractName": "GRASSUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.0004,
+      "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": 0.00030000000000000003
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000216",
@@ -576,9 +714,9 @@
       "contractName": "ZORAUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "lighterFunding": 0.000016,
+      "edgexFunding": -0.00124096,
+      "lighterEdgexArb": 0.00125696
     },
     {
       "contractId": "10000217",
@@ -588,7 +726,10 @@
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "grvtFunding": 0.0062,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": -0.006104,
+      "edgexGrvtArb": -0.0060999999999999995
     },
     {
       "contractId": "10000220",
@@ -596,9 +737,12 @@
       "contractName": "WLFIUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.00052,
-      "edgexFunding": 0.0001,
-      "arb": 0.00041999999999999996
+      "lighterFunding": 0.0007679999999999999,
+      "edgexFunding": 0.00047426,
+      "grvtFunding": 0.0981,
+      "lighterEdgexArb": 0.0002937399999999999,
+      "lighterGrvtArb": -0.097332,
+      "edgexGrvtArb": -0.09762574
     },
     {
       "contractId": "10000221",
@@ -607,8 +751,8 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.0001,
-      "arb": -0.000004000000000000016
+      "edgexFunding": 0.0000693,
+      "lighterEdgexArb": 0.000026699999999999985
     },
     {
       "contractId": "10000222",
@@ -617,8 +761,8 @@
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.00356234,
-      "arb": -0.00346634
+      "edgexFunding": 0.00326282,
+      "lighterEdgexArb": -0.00316682
     },
     {
       "contractId": "10000227",
@@ -626,9 +770,9 @@
       "contractName": "PAXGUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": 0.000312,
+      "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": 0.000212
+      "lighterEdgexArb": -0.000004000000000000016
     },
     {
       "contractId": "10000228",
@@ -636,10 +780,20 @@
       "contractName": "PYTHUSD",
       "fundingRateIntervalMin": 240,
       "fundingInterestRate": 0.0003,
-      "lighterFunding": -0.000047999999999999994,
+      "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "arb": -0.000148
+      "lighterEdgexArb": -0.000004000000000000016
+    },
+    {
+      "contractId": "10000229",
+      "symbol": "CFX",
+      "contractName": "CFXUSD",
+      "fundingRateIntervalMin": 240,
+      "fundingInterestRate": 0.0003,
+      "edgexFunding": 0.0001,
+      "grvtFunding": 0.0374,
+      "edgexGrvtArb": -0.0373
     }
   ],
-  "lastUpdated": "2025-09-19T19:29:13.268Z"
+  "lastUpdated": "2025-09-20T05:12:16.570Z"
 }

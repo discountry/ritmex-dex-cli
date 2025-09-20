@@ -5,12 +5,19 @@ import type { TableRow } from "../types/table";
 import { buildTableRows } from "../utils/table";
 import { saveSnapshot } from "../utils/snapshot";
 
-export type RowStatus = "idle" | "waiting-edgex" | "waiting-lighter" | "ready" | "empty";
+export type RowStatus =
+  | "idle"
+  | "waiting-edgex"
+  | "waiting-lighter"
+  | "waiting-grvt"
+  | "ready"
+  | "empty";
 
 interface FundingRowsArgs {
   contracts: EdgexMetaContract[];
   edgexFunding: Record<string, EnrichedFundingPoint>;
   lighterRates: LighterFundingEntry[];
+  grvtFunding: Record<string, number>;
   initialRows: TableRow[];
   initialLastUpdated: Date | null;
 }
@@ -25,6 +32,7 @@ export const useFundingRows = ({
   contracts,
   edgexFunding,
   lighterRates,
+  grvtFunding,
   initialRows,
   initialLastUpdated,
 }: FundingRowsArgs): FundingRowsState => {
@@ -35,8 +43,9 @@ export const useFundingRows = ({
   useEffect(() => {
     const hasEdgexData = Object.keys(edgexFunding).length > 0;
     const hasLighterData = lighterRates.length > 0;
+    const hasGrvtData = Object.keys(grvtFunding).length > 0;
 
-    if (!hasEdgexData && !hasLighterData) {
+    if (!hasEdgexData && !hasLighterData && !hasGrvtData) {
       setStatus(initialRows.length ? "ready" : "idle");
       return;
     }
@@ -51,7 +60,11 @@ export const useFundingRows = ({
       return;
     }
 
-    const nextRows = buildTableRows(contracts, edgexFunding, lighterRates);
+    if (!hasGrvtData) {
+      setStatus("waiting-grvt");
+    }
+
+    const nextRows = buildTableRows(contracts, edgexFunding, lighterRates, grvtFunding);
 
     if (!nextRows.length) {
       setRows([]);
@@ -60,12 +73,12 @@ export const useFundingRows = ({
     }
 
     setRows(nextRows);
-    setStatus("ready");
+    setStatus(hasGrvtData ? "ready" : "waiting-grvt");
 
     const timestamp = new Date();
     setLastUpdated(timestamp);
     void saveSnapshot({ rows: nextRows, lastUpdated: timestamp.toISOString() });
-  }, [contracts, edgexFunding, lighterRates, initialRows.length]);
+  }, [contracts, edgexFunding, lighterRates, grvtFunding, initialRows.length]);
 
   return { rows, lastUpdated, status };
 };
