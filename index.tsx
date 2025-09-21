@@ -3,14 +3,12 @@ import { render, Box, Text } from "ink";
 import { Header } from "./src/components/Header";
 import { FundingTable } from "./src/components/FundingTable";
 import { TopSpreadList } from "./src/components/TopSpreadList";
-import { useMetadata } from "./src/hooks/useMetadata";
 import { useLighterFunding } from "./src/hooks/useLighterFunding";
 import { useEdgexFunding } from "./src/hooks/useEdgexFunding";
 import { useGrvtFunding } from "./src/hooks/useGrvtFunding";
 import { useFundingRows } from "./src/hooks/useFundingRows";
 import { useTableSorting, type HeaderConfig } from "./src/hooks/useTableSorting";
 import { useKeyboardNavigation } from "./src/hooks/useKeyboardNavigation";
-import { useVisibleEdgexRefresh } from "./src/hooks/useVisibleEdgexRefresh";
 import { useSnapshotPersistence } from "./src/hooks/useSnapshotPersistence";
 import { buildColumnLabels, buildDisplayRow } from "./src/utils/table";
 import { calculateTopSpreads } from "./src/utils/spread";
@@ -35,13 +33,11 @@ const HEADERS: HeaderConfig[] = [
 const DISPLAY_COLUMNS = HEADERS.map((header) => header.key) as SortKey[];
 
 const App: React.FC = () => {
-  const metadata = useMetadata();
   const lighter = useLighterFunding();
-  const edgex = useEdgexFunding(metadata.contracts);
+  const edgex = useEdgexFunding();
   const grvt = useGrvtFunding();
 
   const { rows, lastUpdated, status: rowStatus } = useFundingRows({
-    contracts: metadata.contracts,
     edgexFunding: edgex.data,
     lighterRates: lighter.rates,
     grvtFunding: grvt.data,
@@ -80,13 +76,6 @@ const App: React.FC = () => {
     [sorting.selectedHeaderIndex, sorting.sortState.key, sorting.sortState.direction]
   );
 
-  useVisibleEdgexRefresh({
-    contracts: metadata.contracts,
-    visibleRows: limitedRows,
-    refreshContracts: edgex.refreshContracts,
-    fetchTimestampsRef: edgex.fetchTimestampsRef,
-  });
-
   useKeyboardNavigation({
     headers: HEADERS,
     selectedHeaderIndex: sorting.selectedHeaderIndex,
@@ -97,16 +86,15 @@ const App: React.FC = () => {
 
   const totalRows = limitedRows.length;
   const fundingError = edgex.error ?? lighter.error ?? grvt.error ?? null;
-
-  const hasContracts = metadata.contracts.length > 0;
+  const hasEdgexData = Object.keys(edgex.data).length > 0;
 
   const statusMessage = useMemo(() => {
-    if (metadata.isLoading && !hasContracts) {
-      return "Loading metadata...";
+    if (edgex.isConnecting && !hasEdgexData) {
+      return "Connecting to edgeX websocket...";
     }
 
-    if (edgex.isRefreshing) {
-      return edgex.scope === "full" ? "Refreshing edgeX funding data..." : "Updating visible edgeX contracts...";
+    if (!edgex.isConnected && !edgex.isConnecting && !hasEdgexData) {
+      return "edgeX websocket disconnected. Retrying...";
     }
 
     if (lighter.isRefreshing) {
@@ -134,7 +122,7 @@ const App: React.FC = () => {
     }
 
     return "";
-  }, [metadata.isLoading, hasContracts, edgex.isRefreshing, edgex.scope, lighter.isRefreshing, grvt.isRefreshing, rowStatus]);
+  }, [edgex.isConnecting, edgex.isConnected, hasEdgexData, lighter.isRefreshing, grvt.isRefreshing, rowStatus]);
 
   const topSpreads = useMemo(
     () => calculateTopSpreads(sorting.sortedRows, 5),
@@ -147,7 +135,6 @@ const App: React.FC = () => {
         title="Ritmex Funding Monitor"
         instructions="Use ← → or press 1-7 to choose a column, Enter to toggle sort."
         lastUpdated={lastUpdated}
-        metadataError={metadata.error}
         fundingError={fundingError}
       />
 

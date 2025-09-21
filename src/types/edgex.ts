@@ -1,34 +1,43 @@
-export interface EdgexMetaContract {
+export interface EdgexTickerEntry {
   contractId: string;
   contractName: string;
-  enableTrade: boolean;
-  enableDisplay: boolean;
-  enableOpenPosition: boolean;
-  fundingRateIntervalMin: string;
-  fundingInterestRate: string;
+  openInterest?: string;
+  fundingRate?: string;
+  fundingTime?: string;
+  nextFundingTime?: string;
+  lastPrice?: string;
 }
 
-export interface EdgexMetaResponse {
-  code: string;
-  data: {
-    contractList: EdgexMetaContract[];
+export interface EdgexQuoteEventMessage {
+  type: "quote-event";
+  channel: string;
+  content: {
+    channel: string;
+    dataType: string;
+    data: EdgexTickerEntry[];
   };
 }
 
-export interface EdgexFundingPoint {
+export interface EdgexPingMessage {
+  type: "ping";
+  time: string;
+}
+
+export type EdgexWsMessage =
+  | EdgexPingMessage
+  | EdgexQuoteEventMessage
+  | {
+      type: "subscribed" | "pong" | "error" | string;
+      channel?: string;
+      request?: string;
+      content?: unknown;
+      time?: string;
+    };
+
+export interface EdgexFundingEntry {
   contractId: string;
-  fundingRate: string;
-  forecastFundingRate: string;
-  fundingRateIntervalMin: string;
-  fundingTime: string;
-}
-
-export interface EdgexFundingResponse {
-  code: string;
-  data: EdgexFundingPoint[];
-}
-
-export interface EnrichedFundingPoint extends EdgexMetaContract {
-  fundingRate?: number;
+  contractName: string;
+  openInterest: number;
+  fundingRate: number;
   fundingRateTime?: string;
 }

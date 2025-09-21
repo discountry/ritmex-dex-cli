@@ -1,11 +1,10 @@
-import type { EdgexMetaContract, EnrichedFundingPoint } from "../types/edgex";
+import type { EdgexFundingEntry } from "../types/edgex";
 import type { LighterFundingEntry } from "../types/lighter";
 import type { DisplayRow, SortKey, TableRow } from "../types/table";
-import { formatArbValue, formatRateValue, normaliseSymbol, parseNumber } from "./format";
+import { formatArbValue, formatRateValue, normaliseSymbol } from "./format";
 
 export const buildTableRows = (
-  contracts: EdgexMetaContract[],
-  edgexFundingById: Record<string, EnrichedFundingPoint | undefined>,
+  edgexFundingById: Record<string, EdgexFundingEntry | undefined>,
   lighterRates: LighterFundingEntry[],
   grvtFundingBySymbol: Record<string, number>
 ): TableRow[] => {
@@ -16,57 +15,58 @@ export const buildTableRows = (
     lighterMap.set(symbolKey, entry.rate);
   });
 
-  return contracts.reduce<TableRow[]>((accumulator, contract) => {
-    const symbol = normaliseSymbol(contract.contractName);
-    const lighterFunding = lighterMap.get(symbol);
-    const edgexFundingPoint = edgexFundingById[contract.contractId];
-    const edgexFunding = edgexFundingPoint?.fundingRate;
-    const grvtFunding = grvtFundingBySymbol[symbol];
+  return Object.values(edgexFundingById)
+    .filter((entry): entry is EdgexFundingEntry => Boolean(entry))
+    .reduce<TableRow[]>((accumulator, entry) => {
+      const symbol = normaliseSymbol(entry.contractName);
+      const lighterFunding = lighterMap.get(symbol);
+      const edgexFunding = entry.fundingRate;
+      const grvtFunding = grvtFundingBySymbol[symbol];
 
-    const availableRates = [lighterFunding, edgexFunding, grvtFunding].filter(
-      (value) => value !== undefined
-    );
+      const availableRates = [lighterFunding, edgexFunding, grvtFunding].filter(
+        (value) => value !== undefined
+      );
 
-    if (availableRates.length < 2) {
+      if (availableRates.length < 2) {
+        return accumulator;
+      }
+
+      const row: TableRow = {
+        contractId: entry.contractId,
+        symbol,
+        contractName: entry.contractName,
+        fundingRateIntervalMin: null,
+        fundingInterestRate: null,
+      };
+
+      if (lighterFunding !== undefined) {
+        row.lighterFunding = lighterFunding;
+      }
+
+      if (edgexFunding !== undefined) {
+        row.edgexFunding = edgexFunding;
+      }
+
+      if (grvtFunding !== undefined) {
+        row.grvtFunding = grvtFunding;
+      }
+
+      if (lighterFunding !== undefined && edgexFunding !== undefined) {
+        row.lighterEdgexArb = lighterFunding - edgexFunding;
+      }
+
+      if (lighterFunding !== undefined && grvtFunding !== undefined) {
+        row.lighterGrvtArb = lighterFunding - grvtFunding;
+      }
+
+      if (edgexFunding !== undefined && grvtFunding !== undefined) {
+        row.edgexGrvtArb = edgexFunding - grvtFunding;
+      }
+
+      accumulator.push(row);
+
       return accumulator;
-    }
-
-    const row: TableRow = {
-      contractId: contract.contractId,
-      symbol,
-      contractName: contract.contractName,
-      fundingRateIntervalMin: parseNumber(contract.fundingRateIntervalMin),
-      fundingInterestRate: parseNumber(contract.fundingInterestRate),
-    };
-
-    if (lighterFunding !== undefined) {
-      row.lighterFunding = lighterFunding;
-    }
-
-    if (edgexFunding !== undefined) {
-      row.edgexFunding = edgexFunding;
-    }
-
-    if (grvtFunding !== undefined) {
-      row.grvtFunding = grvtFunding;
-    }
-
-    if (lighterFunding !== undefined && edgexFunding !== undefined) {
-      row.lighterEdgexArb = lighterFunding - edgexFunding;
-    }
-
-    if (lighterFunding !== undefined && grvtFunding !== undefined) {
-      row.lighterGrvtArb = lighterFunding - grvtFunding;
-    }
-
-    if (edgexFunding !== undefined && grvtFunding !== undefined) {
-      row.edgexGrvtArb = edgexFunding - grvtFunding;
-    }
-
-    accumulator.push(row);
-
-    return accumulator;
-  }, []);
+    }, []);
 };
 
 export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow => {

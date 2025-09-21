@@ -16,7 +16,8 @@ export const TopSpreadList: React.FC<TopSpreadListProps> = ({ entries }) => (
       "Buy Exchange": entry.low.exchange,
       "Buy Rate": formatRateValue(entry.low.rate),
       Spread: formatRateValue(entry.diff),
+      "Estimate 24H profit%": formatRateValue(entry.estimated24hProfit),
     }))}
-    columns={["Symbol", "Sell Exchange", "Sell Rate", "Buy Exchange", "Buy Rate", "Spread"]}
+    columns={["Symbol", "Sell Exchange", "Sell Rate", "Buy Exchange", "Buy Rate", "Spread", "Estimate 24H profit%"]}
   />
 );

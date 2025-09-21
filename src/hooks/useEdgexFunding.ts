@@ -1,141 +1,242 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { fetchEdgexFundingPoint } from "../services/http/edgex";
-import { delay } from "../utils/time";
-import { EDGEX_CYCLE_MS, EDGEX_TOP_REFRESH_MS, FETCH_GAP_MS } from "../utils/constants";
-import type { EdgexMetaContract, EnrichedFundingPoint } from "../types/edgex";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { parseNumber } from "../utils/format";
+import type { EdgexFundingEntry, EdgexQuoteEventMessage, EdgexWsMessage } from "../types/edgex";
 
-export type RefreshScope = "idle" | "full" | "partial";
+const EDGEX_WS_ENDPOINT = "wss://quote.edgex.exchange/api/v1/public/ws";
+const EDGEX_TICKER_CHANNEL = "ticker.all.1s";
+const MIN_NOTIONAL = 10_000;
+const RECONNECT_DELAY_MS = 5_000;
 
 export interface EdgexFundingState {
-  data: Record<string, EnrichedFundingPoint>;
+  data: Record<string, EdgexFundingEntry>;
   error: string | null;
-  isRefreshing: boolean;
-  scope: RefreshScope;
-  refreshAll: () => Promise<void>;
-  refreshContracts: (contracts: EdgexMetaContract[]) => Promise<void>;
-  fetchTimestampsRef: React.MutableRefObject<Record<string, number>>;
+  isConnected: boolean;
+  isConnecting: boolean;
+  lastUpdate: number | null;
 }
 
-const getMsUntilNextHour = () => {
-  const now = new Date();
-  const nextHour = new Date(now);
-  nextHour.setMinutes(0, 0, 0);
-  if (nextHour <= now) {
-    nextHour.setHours(nextHour.getHours() + 1);
+const DECODER = new TextDecoder();
+
+const parseEventData = (eventData: unknown): EdgexWsMessage | null => {
+  if (!eventData) return null;
+  try {
+    if (typeof eventData === "string") {
+      return JSON.parse(eventData) as EdgexWsMessage;
+    }
+
+    if (eventData instanceof ArrayBuffer) {
+      const text = DECODER.decode(eventData);
+      return JSON.parse(text) as EdgexWsMessage;
+    }
+
+    return JSON.parse(String(eventData)) as EdgexWsMessage;
+  } catch (error) {
+    console.error("Failed to parse edgeX websocket payload", error);
+    return null;
   }
-  return nextHour.getTime() - now.getTime();
 };
 
-export const useEdgexFunding = (contracts: EdgexMetaContract[]): EdgexFundingState => {
-  const [data, setData] = useState<Record<string, EnrichedFundingPoint>>({});
+export const useEdgexFunding = (): EdgexFundingState => {
+  const [data, setData] = useState<Record<string, EdgexFundingEntry>>({});
   const [error, setError] = useState<string | null>(null);
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  const [scope, setScope] = useState<RefreshScope>("idle");
-  const fetchLockRef = useRef(false);
-  const fetchTimestampsRef = useRef<Record<string, number>>({});
+  const [lastUpdate, setLastUpdate] = useState<number | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
 
-  const selectionMemo = useMemo(() => contracts, [contracts]);
+  const socketRef = useRef<WebSocket | null>(null);
+  const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const connectRef = useRef<() => void>(() => {});
 
-  const pull = useCallback(
-    async (targetContracts?: EdgexMetaContract[]) => {
-      const selection = targetContracts && targetContracts.length ? targetContracts : selectionMemo;
-      if (!selection.length || fetchLockRef.current) {
+  const clearReconnectTimer = () => {
+    if (reconnectTimeoutRef.current) {
+      clearTimeout(reconnectTimeoutRef.current);
+      reconnectTimeoutRef.current = null;
+    }
+  };
+
+  const handleMessage = useCallback(
+    (message: EdgexWsMessage | null) => {
+      if (!message) return;
+
+      if (message.type === "ping") {
+        const time = (message.time ?? String(Date.now())) as string;
+        socketRef.current?.send(JSON.stringify({ type: "pong", time }));
         return;
       }
 
-      const isFullRefresh = selection.length === selectionMemo.length;
-      setIsRefreshing(true);
-      setScope(isFullRefresh ? "full" : "partial");
-      fetchLockRef.current = true;
-
-      const now = Date.now();
-      const next: Record<string, EnrichedFundingPoint> = {};
-      let lastError: string | null = null;
-
-      for (let index = 0; index < selection.length; index += 1) {
-        const contract = selection[index];
-        if (!contract) continue;
-        try {
-          const fundingPoint = await fetchEdgexFundingPoint(contract.contractId);
-          if (fundingPoint) {
-            const forecast = Number(fundingPoint.forecastFundingRate);
-            const fallback = Number(fundingPoint.fundingRate);
-            const fourHourRate = Number.isFinite(forecast) ? forecast : Number.isFinite(fallback) ? fallback : null;
-
-            if (fourHourRate !== null) {
-              const eightHourRate = fourHourRate * 2;
-              next[contract.contractId] = {
-                ...contract,
-                fundingRate: eightHourRate,
-                fundingRateTime: fundingPoint.fundingTime,
-              };
-              fetchTimestampsRef.current[contract.contractId] = now;
-            }
-          }
-        } catch (requestError) {
-          lastError = (requestError as Error).message;
-        }
-
-        if (index < selection.length - 1) {
-          await delay(FETCH_GAP_MS);
-        }
+      if (message.type === "error") {
+        const details =
+          typeof message.content === "string"
+            ? message.content
+            : typeof message.content === "object" && message.content !== null
+            ? JSON.stringify(message.content)
+            : "edgeX websocket returned an error";
+        setError(details);
+        return;
       }
 
-      setData((prev) => ({ ...prev, ...next }));
-      setError(lastError);
-      setIsRefreshing(false);
-      setScope("idle");
-      fetchLockRef.current = false;
+      if (message.type !== "quote-event") {
+        return;
+      }
+
+      const quoteMessage = message as EdgexQuoteEventMessage;
+      if (quoteMessage.channel !== EDGEX_TICKER_CHANNEL) {
+        return;
+      }
+
+      const content = quoteMessage.content;
+      if (!content || !Array.isArray(content.data) || !content.data.length) {
+        return;
+      }
+
+      const updates: Record<string, EdgexFundingEntry> = {};
+      const removals = new Set<string>();
+
+      content.data.forEach((entry) => {
+        if (!entry?.contractId || !entry.contractName) return;
+
+        const openInterest = parseNumber(entry.openInterest ?? undefined);
+        const fundingRate = parseNumber(entry.fundingRate ?? undefined);
+        const lastPrice = parseNumber(entry.lastPrice ?? undefined);
+
+        const notional =
+          openInterest !== null && lastPrice !== null ? openInterest * lastPrice : Number.NaN;
+
+        if (
+          openInterest === null ||
+          lastPrice === null ||
+          !Number.isFinite(openInterest) ||
+          !Number.isFinite(lastPrice) ||
+          !Number.isFinite(notional) ||
+          notional < MIN_NOTIONAL
+        ) {
+          removals.add(entry.contractId);
+          return;
+        }
+
+        if (fundingRate === null || !Number.isFinite(fundingRate)) {
+          removals.add(entry.contractId);
+          return;
+        }
+
+        const eightHourRate = fundingRate * 2;
+
+        updates[entry.contractId] = {
+          contractId: entry.contractId,
+          contractName: entry.contractName,
+          openInterest,
+          fundingRate: eightHourRate,
+          fundingRateTime: entry.fundingTime,
+        };
+      });
+
+      if (!Object.keys(updates).length && !removals.size) {
+        return;
+      }
+
+      setData((previous) => {
+        const next = { ...previous };
+        removals.forEach((id) => {
+          delete next[id];
+        });
+        return { ...next, ...updates };
+      });
+
+      setLastUpdate(Date.now());
+      setError(null);
     },
-    [selectionMemo]
+    []
   );
 
-  useEffect(() => {
-    if (!contracts.length) return;
-
-    let cancelled = false;
-    let hourlyTimeout: NodeJS.Timeout | null = null;
-    let topInterval: NodeJS.Timeout | null = null;
-
-    const scheduleHourlyCycle = (delayMs: number) => {
-      if (hourlyTimeout) {
-        clearTimeout(hourlyTimeout);
+  const disposeSocket = useCallback(() => {
+    clearReconnectTimer();
+    const socket = socketRef.current;
+    if (socket) {
+      socket.onopen = null;
+      socket.onclose = null;
+      socket.onerror = null;
+      socket.onmessage = null;
+      if (socket.readyState === WebSocket.OPEN) {
+        socket.close();
       }
+    }
+    socketRef.current = null;
+  }, []);
 
-      hourlyTimeout = setTimeout(async () => {
-        if (cancelled) return;
-        await pull();
-        if (!cancelled) {
-          scheduleHourlyCycle(EDGEX_CYCLE_MS);
-        }
-      }, delayMs);
-    };
+  const scheduleReconnect = useCallback(() => {
+    if (reconnectTimeoutRef.current) return;
+    reconnectTimeoutRef.current = setTimeout(() => {
+      reconnectTimeoutRef.current = null;
+      connectRef.current();
+    }, RECONNECT_DELAY_MS);
+  }, []);
 
-    void pull();
-    scheduleHourlyCycle(getMsUntilNextHour());
+  const connect = useCallback(() => {
+    connectRef.current = connect;
+    if (typeof WebSocket === "undefined") {
+      setError("WebSocket is not supported in this environment");
+      setIsConnected(false);
+      setIsConnecting(false);
+      return;
+    }
 
-    topInterval = setInterval(() => {
-      void pull();
-    }, EDGEX_TOP_REFRESH_MS);
+    disposeSocket();
+    clearReconnectTimer();
+
+    try {
+      setIsConnecting(true);
+      setIsConnected(false);
+      const socket = new WebSocket(`${EDGEX_WS_ENDPOINT}?timestamp=${Date.now()}`);
+      socketRef.current = socket;
+
+      socket.onopen = () => {
+        setIsConnecting(false);
+        setIsConnected(true);
+        setError(null);
+        socket.send(JSON.stringify({ type: "subscribe", channel: EDGEX_TICKER_CHANNEL }));
+      };
+
+      socket.onmessage = (event) => {
+        const parsed = parseEventData(event.data);
+        handleMessage(parsed);
+      };
+
+      socket.onerror = () => {
+        setError("edgeX websocket connection failed");
+      };
+
+      socket.onclose = () => {
+        setIsConnected(false);
+        setIsConnecting(false);
+        scheduleReconnect();
+      };
+    } catch (connectionError) {
+      console.error("Failed to establish edgeX websocket", connectionError);
+      setError("Failed to establish edgeX websocket connection");
+      setIsConnected(false);
+      setIsConnecting(false);
+      scheduleReconnect();
+    }
+  }, [disposeSocket, handleMessage, scheduleReconnect]);
+
+  useEffect(() => {
+    connectRef.current = connect;
+  }, [connect]);
+
+  useEffect(() => {
+    connect();
 
     return () => {
-      cancelled = true;
-      if (hourlyTimeout) {
-        clearTimeout(hourlyTimeout);
-      }
-      if (topInterval) {
-        clearInterval(topInterval);
-      }
+      clearReconnectTimer();
+      disposeSocket();
     };
-  }, [contracts, pull]);
+  }, [connect, disposeSocket]);
 
   return {
     data,
     error,
-    isRefreshing,
-    scope,
-    refreshAll: () => pull(),
-    refreshContracts: (subset) => pull(subset),
-    fetchTimestampsRef,
+    isConnected,
+    isConnecting,
+    lastUpdate,
   };
 };

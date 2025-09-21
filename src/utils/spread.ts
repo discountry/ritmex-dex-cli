@@ -33,11 +33,14 @@ export const calculateTopSpreads = (rows: TableRow[], limit: number): SpreadEntr
     const diff = high.value - low.value;
     if (diff <= 0) return;
 
+    const estimated24hProfit = diff * 3;
+
     entries.push({
       symbol: row.symbol,
       diff,
       high: { exchange: EXCHANGE_LABELS[high.exchange], rate: high.value },
       low: { exchange: EXCHANGE_LABELS[low.exchange], rate: low.value },
+      estimated24hProfit,
     });
   });
 

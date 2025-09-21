@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { EdgexMetaContract, EnrichedFundingPoint } from "../types/edgex";
+import type { EdgexFundingEntry } from "../types/edgex";
 import type { LighterFundingEntry } from "../types/lighter";
 import type { TableRow } from "../types/table";
 import { buildTableRows } from "../utils/table";
@@ -14,8 +14,7 @@ export type RowStatus =
   | "empty";
 
 interface FundingRowsArgs {
-  contracts: EdgexMetaContract[];
-  edgexFunding: Record<string, EnrichedFundingPoint>;
+  edgexFunding: Record<string, EdgexFundingEntry>;
   lighterRates: LighterFundingEntry[];
   grvtFunding: Record<string, number>;
   initialRows: TableRow[];
@@ -29,7 +28,6 @@ interface FundingRowsState {
 }
 
 export const useFundingRows = ({
-  contracts,
   edgexFunding,
   lighterRates,
   grvtFunding,
@@ -64,7 +62,7 @@ export const useFundingRows = ({
       setStatus("waiting-grvt");
     }
 
-    const nextRows = buildTableRows(contracts, edgexFunding, lighterRates, grvtFunding);
+    const nextRows = buildTableRows(edgexFunding, lighterRates, grvtFunding);
 
     if (!nextRows.length) {
       setRows([]);
@@ -78,7 +76,7 @@ export const useFundingRows = ({
     const timestamp = new Date();
     setLastUpdated(timestamp);
     void saveSnapshot({ rows: nextRows, lastUpdated: timestamp.toISOString() });
-  }, [contracts, edgexFunding, lighterRates, grvtFunding, initialRows.length]);
+  }, [edgexFunding, lighterRates, grvtFunding, initialRows.length]);
 
   return { rows, lastUpdated, status };
 };
