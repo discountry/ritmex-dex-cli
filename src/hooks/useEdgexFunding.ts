@@ -85,14 +85,22 @@ export const useEdgexFunding = (): EdgexFundingState => {
       }
 
       const content = quoteMessage.content;
-      if (!content || !Array.isArray(content.data) || !content.data.length) {
+      if (!content || !Array.isArray(content.data)) {
+        return;
+      }
+
+      const dataType = typeof content.dataType === "string" ? content.dataType.toLowerCase() : "";
+      const isSnapshot = dataType === "snapshot";
+      const entries = content.data;
+
+      if (!entries.length && !isSnapshot) {
         return;
       }
 
       const updates: Record<string, EdgexFundingEntry> = {};
       const removals = new Set<string>();
 
-      content.data.forEach((entry) => {
+      entries.forEach((entry) => {
         if (!entry?.contractId || !entry.contractName) return;
 
         const openInterest = parseNumber(entry.openInterest ?? undefined);
@@ -130,17 +138,22 @@ export const useEdgexFunding = (): EdgexFundingState => {
         };
       });
 
-      if (!Object.keys(updates).length && !removals.size) {
+      const hasChanges = isSnapshot || Object.keys(updates).length > 0 || removals.size > 0;
+      if (!hasChanges) {
         return;
       }
 
-      setData((previous) => {
-        const next = { ...previous };
-        removals.forEach((id) => {
-          delete next[id];
+      if (isSnapshot) {
+        setData(() => updates);
+      } else {
+        setData((previous) => {
+          const next = { ...previous };
+          removals.forEach((id) => {
+            delete next[id];
+          });
+          return { ...next, ...updates };
         });
-        return { ...next, ...updates };
-      });
+      }
 
       setLastUpdate(Date.now());
       setError(null);
