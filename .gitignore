@@ -1,14 +1,21 @@
-# Dependencies and lockfiles
+# Dependencies
 node_modules/
-bun.lock
+.bun/
+
+# Lockfiles from other package managers
 pnpm-lock.yaml
 yarn.lock
 package-lock.json
+bun.lockb
 
-# Build artefacts
+# Build artefacts & caches
 build/
 dist/
 .tmp/
+.cache/
+tmp/
+coverage/
+*.tsbuildinfo
 *.log
 
 # IDE & OS
@@ -20,5 +27,5 @@ Thumbs.db
 # Environment overrides
 .env
 .env.*
+!.env.example
 *.local
-data/
