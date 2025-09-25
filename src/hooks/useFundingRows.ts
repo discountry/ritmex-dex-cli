@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { EdgexFundingEntry } from "../types/edgex";
 import type { LighterFundingEntry } from "../types/lighter";
 import type { TableRow } from "../types/table";
+import type { AsterFundingEntry } from "../types/aster";
 import { buildTableRows } from "../utils/table";
 import { saveSnapshot } from "../utils/snapshot";
 
@@ -17,6 +18,7 @@ interface FundingRowsArgs {
   edgexFunding: Record<string, EdgexFundingEntry>;
   lighterRates: LighterFundingEntry[];
   grvtFunding: Record<string, number>;
+  asterRates: AsterFundingEntry[];
   initialRows: TableRow[];
   initialLastUpdated: Date | null;
 }
@@ -31,6 +33,7 @@ export const useFundingRows = ({
   edgexFunding,
   lighterRates,
   grvtFunding,
+  asterRates,
   initialRows,
   initialLastUpdated,
 }: FundingRowsArgs): FundingRowsState => {
@@ -42,8 +45,9 @@ export const useFundingRows = ({
     const hasEdgexData = Object.keys(edgexFunding).length > 0;
     const hasLighterData = lighterRates.length > 0;
     const hasGrvtData = Object.keys(grvtFunding).length > 0;
+    const hasAsterData = asterRates.length > 0;
 
-    if (!hasEdgexData && !hasLighterData && !hasGrvtData) {
+    if (!hasEdgexData && !hasLighterData && !hasGrvtData && !hasAsterData) {
       setStatus(initialRows.length ? "ready" : "idle");
       return;
     }
@@ -62,7 +66,7 @@ export const useFundingRows = ({
       setStatus("waiting-grvt");
     }
 
-    const nextRows = buildTableRows(edgexFunding, lighterRates, grvtFunding);
+    const nextRows = buildTableRows(edgexFunding, lighterRates, grvtFunding, asterRates);
 
     if (!nextRows.length) {
       setRows([]);
@@ -76,7 +80,7 @@ export const useFundingRows = ({
     const timestamp = new Date();
     setLastUpdated(timestamp);
     void saveSnapshot({ rows: nextRows, lastUpdated: timestamp.toISOString() });
-  }, [edgexFunding, lighterRates, grvtFunding, initialRows.length]);
+  }, [edgexFunding, lighterRates, grvtFunding, asterRates, initialRows.length]);
 
   return { rows, lastUpdated, status };
 };

@@ -6,6 +6,7 @@ import { TopSpreadList } from "./src/components/TopSpreadList";
 import { useLighterFunding } from "./src/hooks/useLighterFunding";
 import { useEdgexFunding } from "./src/hooks/useEdgexFunding";
 import { useGrvtFunding } from "./src/hooks/useGrvtFunding";
+import { useAsterFunding } from "./src/hooks/useAsterFunding";
 import { useFundingRows } from "./src/hooks/useFundingRows";
 import { useTableSorting, type HeaderConfig } from "./src/hooks/useTableSorting";
 import { useKeyboardNavigation } from "./src/hooks/useKeyboardNavigation";
@@ -25,9 +26,13 @@ const HEADERS: HeaderConfig[] = [
   { key: "lighterFunding", label: "Lighter", shortcut: "2" },
   { key: "edgexFunding", label: "Edgex", shortcut: "3" },
   { key: "grvtFunding", label: "GRVT", shortcut: "4" },
-  { key: "lighterEdgexArb", label: "L-E Arb", shortcut: "5" },
-  { key: "lighterGrvtArb", label: "L-G Arb", shortcut: "6" },
-  { key: "edgexGrvtArb", label: "E-G Arb", shortcut: "7" },
+  { key: "asterFunding", label: "Aster", shortcut: "5" },
+  { key: "lighterEdgexArb", label: "L-E Arb", shortcut: "6" },
+  { key: "lighterGrvtArb", label: "L-G Arb", shortcut: "7" },
+  { key: "edgexGrvtArb", label: "E-G Arb", shortcut: "8" },
+  { key: "lighterAsterArb", label: "L-A Arb", shortcut: "9" },
+  { key: "edgexAsterArb", label: "E-A Arb", shortcut: "0" },
+  { key: "grvtAsterArb", label: "G-A Arb", shortcut: "-" },
 ];
 
 const DISPLAY_COLUMNS = HEADERS.map((header) => header.key) as SortKey[];
@@ -36,11 +41,13 @@ const App: React.FC = () => {
   const lighter = useLighterFunding();
   const edgex = useEdgexFunding();
   const grvt = useGrvtFunding();
+  const aster = useAsterFunding();
 
   const { rows, lastUpdated, status: rowStatus } = useFundingRows({
     edgexFunding: edgex.data,
     lighterRates: lighter.rates,
     grvtFunding: grvt.data,
+    asterRates: aster.rates,
     initialRows: INITIAL_ROWS,
     initialLastUpdated: INITIAL_LAST_UPDATED,
   });
@@ -85,7 +92,7 @@ const App: React.FC = () => {
   });
 
   const totalRows = limitedRows.length;
-  const fundingError = edgex.error ?? lighter.error ?? grvt.error ?? null;
+  const fundingError = edgex.error ?? lighter.error ?? grvt.error ?? aster.error ?? null;
   const hasEdgexData = Object.keys(edgex.data).length > 0;
 
   const statusMessage = useMemo(() => {
@@ -117,6 +124,10 @@ const App: React.FC = () => {
       return "Waiting for GRVT funding refresh...";
     }
 
+    if (aster.isRefreshing) {
+      return "Refreshing Aster funding data...";
+    }
+
     if (rowStatus === "empty") {
       return "No overlapping contracts found.";
     }
@@ -125,7 +136,7 @@ const App: React.FC = () => {
   }, [edgex.isConnecting, edgex.isConnected, hasEdgexData, lighter.isRefreshing, grvt.isRefreshing, rowStatus]);
 
   const topSpreads = useMemo(
-    () => calculateTopSpreads(sorting.sortedRows, 5),
+    () => calculateTopSpreads(sorting.sortedRows, 10),
     [sorting.sortedRows]
   );
 
@@ -133,7 +144,7 @@ const App: React.FC = () => {
     <Box flexDirection="column">
       <Header
         title="Ritmex Funding Monitor"
-        instructions="Use ← → or press 1-7 to choose a column, Enter to toggle sort."
+        instructions="Use ← → or press 1-0/- to choose a column, Enter to toggle sort."
         lastUpdated={lastUpdated}
         fundingError={fundingError}
       />

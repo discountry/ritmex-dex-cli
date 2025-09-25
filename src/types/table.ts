@@ -7,9 +7,13 @@ export interface TableRow {
   lighterFunding?: number;
   edgexFunding?: number;
   grvtFunding?: number;
+  asterFunding?: number;
   lighterEdgexArb?: number;
   lighterGrvtArb?: number;
   edgexGrvtArb?: number;
+  lighterAsterArb?: number;
+  edgexAsterArb?: number;
+  grvtAsterArb?: number;
 }
 
 export interface FundingSnapshot {
@@ -23,9 +27,13 @@ export type SortKey = keyof Pick<
   | "lighterFunding"
   | "edgexFunding"
   | "grvtFunding"
+  | "asterFunding"
   | "lighterEdgexArb"
   | "lighterGrvtArb"
   | "edgexGrvtArb"
+  | "lighterAsterArb"
+  | "edgexAsterArb"
+  | "grvtAsterArb"
 >;
 export type SortDirection = "asc" | "desc";
 

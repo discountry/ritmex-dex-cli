@@ -1,18 +1,26 @@
 import type { EdgexFundingEntry } from "../types/edgex";
 import type { LighterFundingEntry } from "../types/lighter";
 import type { DisplayRow, SortKey, TableRow } from "../types/table";
+import type { AsterFundingEntry } from "../types/aster";
 import { formatArbValue, formatRateValue, normaliseSymbol } from "./format";
 
 export const buildTableRows = (
   edgexFundingById: Record<string, EdgexFundingEntry | undefined>,
   lighterRates: LighterFundingEntry[],
-  grvtFundingBySymbol: Record<string, number>
+  grvtFundingBySymbol: Record<string, number>,
+  asterRates: AsterFundingEntry[]
 ): TableRow[] => {
   const lighterMap = new Map<string, number>();
+  const asterMap = new Map<string, number>();
 
   lighterRates.forEach((entry) => {
     const symbolKey = entry.symbol.toUpperCase();
     lighterMap.set(symbolKey, entry.rate);
+  });
+
+  asterRates.forEach((entry) => {
+    const symbolKey = entry.symbol.toUpperCase();
+    asterMap.set(symbolKey, entry.rate);
   });
 
   return Object.values(edgexFundingById)
@@ -22,8 +30,9 @@ export const buildTableRows = (
       const lighterFunding = lighterMap.get(symbol);
       const edgexFunding = entry.fundingRate;
       const grvtFunding = grvtFundingBySymbol[symbol];
+      const asterFunding = asterMap.get(symbol);
 
-      const availableRates = [lighterFunding, edgexFunding, grvtFunding].filter(
+      const availableRates = [lighterFunding, edgexFunding, grvtFunding, asterFunding].filter(
         (value) => value !== undefined
       );
 
@@ -51,6 +60,10 @@ export const buildTableRows = (
         row.grvtFunding = grvtFunding;
       }
 
+      if (asterFunding !== undefined) {
+        row.asterFunding = asterFunding;
+      }
+
       if (lighterFunding !== undefined && edgexFunding !== undefined) {
         row.lighterEdgexArb = lighterFunding - edgexFunding;
       }
@@ -61,6 +74,18 @@ export const buildTableRows = (
 
       if (edgexFunding !== undefined && grvtFunding !== undefined) {
         row.edgexGrvtArb = edgexFunding - grvtFunding;
+      }
+
+      if (lighterFunding !== undefined && asterFunding !== undefined) {
+        row.lighterAsterArb = lighterFunding - asterFunding;
+      }
+
+      if (edgexFunding !== undefined && asterFunding !== undefined) {
+        row.edgexAsterArb = edgexFunding - asterFunding;
+      }
+
+      if (grvtFunding !== undefined && asterFunding !== undefined) {
+        row.grvtAsterArb = grvtFunding - asterFunding;
       }
 
       accumulator.push(row);
@@ -84,6 +109,9 @@ export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow =
       case "grvtFunding":
         accumulator[column] = formatRateValue(row.grvtFunding);
         break;
+    case "asterFunding":
+      accumulator[column] = formatRateValue(row.asterFunding);
+      break;
       case "lighterEdgexArb":
         accumulator[column] = formatArbValue(row.lighterEdgexArb);
         break;
@@ -93,6 +121,15 @@ export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow =
       case "edgexGrvtArb":
         accumulator[column] = formatArbValue(row.edgexGrvtArb);
         break;
+    case "lighterAsterArb":
+      accumulator[column] = formatArbValue(row.lighterAsterArb);
+      break;
+    case "edgexAsterArb":
+      accumulator[column] = formatArbValue(row.edgexAsterArb);
+      break;
+    case "grvtAsterArb":
+      accumulator[column] = formatArbValue(row.grvtAsterArb);
+      break;
       default: {
         const exhaustiveCheck: never = column;
         throw new Error(`Unhandled column key: ${exhaustiveCheck}`);

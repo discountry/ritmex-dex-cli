@@ -4,6 +4,7 @@ const EXCHANGE_LABELS = {
   lighter: "Lighter",
   edgex: "Edgex",
   grvt: "GRVT",
+  aster: "Aster",
 } as const;
 
 type ExchangeKey = keyof typeof EXCHANGE_LABELS;
@@ -22,6 +23,7 @@ export const calculateTopSpreads = (rows: TableRow[], limit: number): SpreadEntr
       { key: "lighterFunding", exchange: "lighter", value: row.lighterFunding },
       { key: "edgexFunding", exchange: "edgex", value: row.edgexFunding },
       { key: "grvtFunding", exchange: "grvt", value: row.grvtFunding },
+      { key: "asterFunding", exchange: "aster", value: row.asterFunding },
     ];
 
     const available = rateEntries.filter((entry) => entry.value !== undefined) as Array<RateEntry & { value: number }>;

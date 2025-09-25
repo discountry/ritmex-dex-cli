@@ -16,7 +16,14 @@ export interface TableSortingResult {
   toggleSort: (index: number) => void;
 }
 
-const ARB_KEYS: SortKey[] = ["lighterEdgexArb", "lighterGrvtArb", "edgexGrvtArb"];
+const ARB_KEYS: SortKey[] = [
+  "lighterEdgexArb",
+  "lighterGrvtArb",
+  "edgexGrvtArb",
+  "lighterAsterArb",
+  "edgexAsterArb",
+  "grvtAsterArb",
+];
 
 const compareRows = (a: TableRow, b: TableRow, key: SortKey, direction: "asc" | "desc") => {
   const factor = direction === "asc" ? 1 : -1;
