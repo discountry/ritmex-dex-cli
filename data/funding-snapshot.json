@@ -7,11 +7,15 @@
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": -0.00003316,
-      "asterFunding": 0.0000284,
-      "lighterEdgexArb": 0.00012916,
-      "lighterAsterArb": 0.00006759999999999999,
-      "edgexAsterArb": -0.00006156
+      "edgexFunding": -0.00002744,
+      "grvtFunding": 0.000111,
+      "asterFunding": 0.00002719,
+      "lighterEdgexArb": 0.00012344,
+      "lighterGrvtArb": -0.000015000000000000012,
+      "edgexGrvtArb": -0.00013844,
+      "lighterAsterArb": 0.00006880999999999999,
+      "edgexAsterArb": -0.00005463,
+      "grvtAsterArb": 0.00008381
     },
     {
       "contractId": "10000002",
@@ -19,12 +23,16 @@
       "contractName": "ETHUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.000056,
+      "lighterFunding": -0.000047999999999999994,
       "edgexFunding": 0.0001,
+      "grvtFunding": 0.000062,
       "asterFunding": 0,
-      "lighterEdgexArb": -0.000156,
-      "lighterAsterArb": -0.000056,
-      "edgexAsterArb": 0.0001
+      "lighterEdgexArb": -0.000148,
+      "lighterGrvtArb": -0.00010999999999999999,
+      "edgexGrvtArb": 0.000038,
+      "lighterAsterArb": -0.000047999999999999994,
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": 0.000062
     },
     {
       "contractId": "10000003",
@@ -34,10 +42,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000063,
       "asterFunding": 0,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000159,
+      "edgexGrvtArb": 0.000163,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.0001
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": -0.000063
     },
     {
       "contractId": "10000052",
@@ -45,12 +57,16 @@
       "contractName": "TRUMPUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.000392,
+      "lighterFunding": -0.000184,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000257,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": -0.000492,
-      "lighterAsterArb": -0.000492,
-      "edgexAsterArb": 0
+      "lighterEdgexArb": -0.000284,
+      "lighterGrvtArb": 0.00007300000000000001,
+      "edgexGrvtArb": 0.000357,
+      "lighterAsterArb": -0.000284,
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000357
     },
     {
       "contractId": "10000053",
@@ -59,11 +75,11 @@
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": -0.00012636,
+      "edgexFunding": -0.00010924,
       "asterFunding": 0,
-      "lighterEdgexArb": 0.00022236,
+      "lighterEdgexArb": 0.00020523999999999998,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": -0.00012636
+      "edgexAsterArb": -0.00010924
     },
     {
       "contractId": "10000054",
@@ -73,10 +89,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.00045400000000000003,
       "asterFunding": 0,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.00055,
+      "edgexGrvtArb": 0.000554,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.0001
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": -0.00045400000000000003
     },
     {
       "contractId": "10000055",
@@ -86,10 +106,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.00053,
       "asterFunding": 0,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.0006259999999999999,
+      "edgexGrvtArb": 0.00063,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.0001
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": -0.00053
     },
     {
       "contractId": "10000056",
@@ -99,10 +123,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.0008219999999999999,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.0009179999999999999,
+      "edgexGrvtArb": 0.000922,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000922
     },
     {
       "contractId": "10000057",
@@ -110,12 +138,16 @@
       "contractName": "ARBUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.000056,
+      "lighterFunding": 0.00008800000000000001,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000325,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": -0.000044000000000000006,
-      "lighterAsterArb": -0.000044000000000000006,
-      "edgexAsterArb": 0
+      "lighterEdgexArb": -0.000011999999999999994,
+      "lighterGrvtArb": 0.000413,
+      "edgexGrvtArb": 0.000425,
+      "lighterAsterArb": -0.000011999999999999994,
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000425
     },
     {
       "contractId": "10000058",
@@ -123,12 +155,16 @@
       "contractName": "OPUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.00008,
+      "lighterFunding": 0.000064,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000325,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": -0.000019999999999999998,
-      "lighterAsterArb": -0.000019999999999999998,
-      "edgexAsterArb": 0
+      "lighterEdgexArb": -0.00003600000000000001,
+      "lighterGrvtArb": 0.00038899999999999997,
+      "edgexGrvtArb": 0.000425,
+      "lighterAsterArb": -0.00003600000000000001,
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000425
     },
     {
       "contractId": "10000059",
@@ -138,10 +174,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "asterFunding": -0.00006463,
+      "grvtFunding": -0.0007480000000000001,
+      "asterFunding": -0.000062,
       "lighterEdgexArb": -0.000004000000000000016,
-      "lighterAsterArb": 0.00016062999999999999,
-      "edgexAsterArb": 0.00016463
+      "lighterGrvtArb": 0.000844,
+      "edgexGrvtArb": 0.0008480000000000001,
+      "lighterAsterArb": 0.000158,
+      "edgexAsterArb": 0.000162,
+      "grvtAsterArb": -0.0006860000000000001
     },
     {
       "contractId": "10000060",
@@ -149,12 +189,12 @@
       "contractName": "1000SHIBUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.000008,
+      "lighterFunding": 0.00008,
       "edgexFunding": 0.0001,
-      "asterFunding": 0.00003346,
-      "lighterEdgexArb": -0.00010800000000000001,
-      "lighterAsterArb": -0.00004146,
-      "edgexAsterArb": 0.00006654
+      "asterFunding": 0.00003936,
+      "lighterEdgexArb": -0.000019999999999999998,
+      "lighterAsterArb": 0.000040640000000000004,
+      "edgexAsterArb": 0.00006064
     },
     {
       "contractId": "10000061",
@@ -162,11 +202,11 @@
       "contractName": "1000BONKUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.000023999999999999997,
+      "lighterFunding": 0.000072,
       "edgexFunding": 0.0001,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": -0.000124,
-      "lighterAsterArb": -0.000124,
+      "lighterEdgexArb": -0.000028000000000000003,
+      "lighterAsterArb": -0.000028000000000000003,
       "edgexAsterArb": 0
     },
     {
@@ -177,7 +217,10 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "lighterEdgexArb": -0.000004000000000000016
+      "grvtFunding": -0.000247,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000343,
+      "edgexGrvtArb": 0.000347
     },
     {
       "contractId": "10000063",
@@ -185,12 +228,16 @@
       "contractName": "BERAUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.000552,
-      "edgexFunding": -0.0001043,
+      "lighterFunding": -0.0009279999999999999,
+      "edgexFunding": -0.00017312,
+      "grvtFunding": -0.0012870000000000002,
       "asterFunding": 0,
-      "lighterEdgexArb": -0.0004477,
-      "lighterAsterArb": -0.000552,
-      "edgexAsterArb": -0.0001043
+      "lighterEdgexArb": -0.0007548799999999999,
+      "lighterGrvtArb": 0.00035900000000000027,
+      "edgexGrvtArb": 0.0011138800000000003,
+      "lighterAsterArb": -0.0009279999999999999,
+      "edgexAsterArb": -0.00017312,
+      "grvtAsterArb": -0.0012870000000000002
     },
     {
       "contractId": "10000064",
@@ -199,11 +246,15 @@
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.00050632,
+      "edgexFunding": 0.00048018,
+      "grvtFunding": 0.000273,
       "asterFunding": 0,
-      "lighterEdgexArb": -0.00041032,
+      "lighterEdgexArb": -0.00038417999999999997,
+      "lighterGrvtArb": -0.00017700000000000002,
+      "edgexGrvtArb": 0.00020717999999999995,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.00050632
+      "edgexAsterArb": 0.00048018,
+      "grvtAsterArb": 0.000273
     },
     {
       "contractId": "10000065",
@@ -213,10 +264,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.00046899999999999996,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000565,
+      "edgexGrvtArb": 0.000569,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000569
     },
     {
       "contractId": "10000066",
@@ -226,10 +281,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000207,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000303,
+      "edgexGrvtArb": 0.000307,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000307
     },
     {
       "contractId": "10000067",
@@ -239,10 +298,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000586,
       "asterFunding": 0,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000682,
+      "edgexGrvtArb": 0.0006860000000000001,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.0001
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": -0.000586
     },
     {
       "contractId": "10000068",
@@ -252,10 +315,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": 0.000031,
       "asterFunding": 0,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.00006499999999999998,
+      "edgexGrvtArb": 0.000069,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.0001
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": 0.000031
     },
     {
       "contractId": "10000069",
@@ -265,10 +332,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000675,
       "asterFunding": 0,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000771,
+      "edgexGrvtArb": 0.0007750000000000001,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.0001
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": -0.000675
     },
     {
       "contractId": "10000070",
@@ -278,10 +349,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000288,
       "asterFunding": 0,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000384,
+      "edgexGrvtArb": 0.000388,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.0001
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": -0.000288
     },
     {
       "contractId": "10000071",
@@ -291,7 +366,10 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "lighterEdgexArb": -0.000004000000000000016
+      "grvtFunding": -0.000531,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000627,
+      "edgexGrvtArb": 0.000631
     },
     {
       "contractId": "10000072",
@@ -299,12 +377,16 @@
       "contractName": "HYPEUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.000392,
+      "lighterFunding": 0.0005920000000000001,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000378,
       "asterFunding": 0.0002,
-      "lighterEdgexArb": 0.000292,
-      "lighterAsterArb": 0.00019199999999999998,
-      "edgexAsterArb": -0.0001
+      "lighterEdgexArb": 0.000492,
+      "lighterGrvtArb": 0.0009700000000000002,
+      "edgexGrvtArb": 0.000478,
+      "lighterAsterArb": 0.0003920000000000001,
+      "edgexAsterArb": -0.0001,
+      "grvtAsterArb": -0.0005780000000000001
     },
     {
       "contractId": "10000073",
@@ -314,10 +396,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": 0.001149,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": -0.0010530000000000001,
+      "edgexGrvtArb": -0.001049,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": 0.001049
     },
     {
       "contractId": "10000074",
@@ -326,11 +412,11 @@
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": -0.00008966,
+      "edgexFunding": -0.00008222,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": 0.00018565999999999998,
+      "lighterEdgexArb": 0.00017821999999999998,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": -0.00018966000000000002
+      "edgexAsterArb": -0.00018222
     },
     {
       "contractId": "10000075",
@@ -340,10 +426,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000328,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000424,
+      "edgexGrvtArb": 0.000428,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000428
     },
     {
       "contractId": "10000076",
@@ -353,10 +443,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000541,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000637,
+      "edgexGrvtArb": 0.0006410000000000001,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.0006410000000000001
     },
     {
       "contractId": "10000077",
@@ -366,10 +460,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000449,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000545,
+      "edgexGrvtArb": 0.000549,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000549
     },
     {
       "contractId": "10000079",
@@ -399,10 +497,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.0008169999999999999,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.0009129999999999999,
+      "edgexGrvtArb": 0.000917,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000917
     },
     {
       "contractId": "10000082",
@@ -420,12 +522,16 @@
       "contractName": "FARTCOINUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.00009599999999999999,
+      "lighterFunding": 0.000104,
       "edgexFunding": 0.0001,
-      "asterFunding": 0.00049552,
-      "lighterEdgexArb": -0.000004000000000000016,
-      "lighterAsterArb": -0.00039952000000000005,
-      "edgexAsterArb": -0.00039552000000000006
+      "grvtFunding": 0.00082,
+      "asterFunding": 0.00051554,
+      "lighterEdgexArb": 0.000003999999999999989,
+      "lighterGrvtArb": -0.000716,
+      "edgexGrvtArb": -0.0007199999999999999,
+      "lighterAsterArb": -0.00041154,
+      "edgexAsterArb": -0.00041554,
+      "grvtAsterArb": 0.00030446
     },
     {
       "contractId": "10000084",
@@ -435,10 +541,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "asterFunding": -0.00007607,
+      "grvtFunding": -0.000211,
+      "asterFunding": -0.00007312,
       "lighterEdgexArb": -0.000004000000000000016,
-      "lighterAsterArb": 0.00017206999999999997,
-      "edgexAsterArb": 0.00017607
+      "lighterGrvtArb": 0.000307,
+      "edgexGrvtArb": 0.000311,
+      "lighterAsterArb": 0.00016911999999999998,
+      "edgexAsterArb": 0.00017312000000000002,
+      "grvtAsterArb": -0.00013788
     },
     {
       "contractId": "10000085",
@@ -448,10 +558,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.00035200000000000005,
       "asterFunding": 0,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.00044800000000000005,
+      "edgexGrvtArb": 0.00045200000000000004,
       "lighterAsterArb": 0.00009599999999999999,
-      "edgexAsterArb": 0.0001
+      "edgexAsterArb": 0.0001,
+      "grvtAsterArb": -0.00035200000000000005
     },
     {
       "contractId": "10000086",
@@ -461,7 +575,10 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "lighterEdgexArb": -0.000004000000000000016
+      "grvtFunding": -0.0006140000000000001,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.00071,
+      "edgexGrvtArb": 0.0007140000000000001
     },
     {
       "contractId": "10000087",
@@ -479,12 +596,16 @@
       "contractName": "WIFUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.000016,
+      "lighterFunding": 0.000032,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000567,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": -0.00008400000000000001,
-      "lighterAsterArb": -0.00008400000000000001,
-      "edgexAsterArb": 0
+      "lighterEdgexArb": -0.000068,
+      "lighterGrvtArb": 0.000599,
+      "edgexGrvtArb": 0.0006670000000000001,
+      "lighterAsterArb": -0.000068,
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.0006670000000000001
     },
     {
       "contractId": "10000089",
@@ -494,10 +615,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": 0.000257,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": -0.000161,
+      "edgexGrvtArb": -0.00015700000000000002,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": 0.00015700000000000002
     },
     {
       "contractId": "10000090",
@@ -505,11 +630,11 @@
       "contractName": "LDOUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.000072,
+      "lighterFunding": 0.000064,
       "edgexFunding": 0.0001,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": -0.000028000000000000003,
-      "lighterAsterArb": -0.000028000000000000003,
+      "lighterEdgexArb": -0.00003600000000000001,
+      "lighterAsterArb": -0.00003600000000000001,
       "edgexAsterArb": 0
     },
     {
@@ -532,8 +657,11 @@
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000054000000000000005,
       "asterFunding": 0.0001,
-      "edgexAsterArb": 0
+      "edgexGrvtArb": 0.000154,
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000154
     },
     {
       "contractId": "10000093",
@@ -541,9 +669,12 @@
       "contractName": "IPUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.000248,
+      "lighterFunding": 0.000032,
       "edgexFunding": 0.0001,
-      "lighterEdgexArb": -0.000348
+      "grvtFunding": -0.000143,
+      "lighterEdgexArb": -0.000068,
+      "lighterGrvtArb": 0.000175,
+      "edgexGrvtArb": 0.000243
     },
     {
       "contractId": "10000094",
@@ -551,9 +682,9 @@
       "contractName": "LAUNCHCOINUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.00021600000000000002,
+      "lighterFunding": 0.000304,
       "edgexFunding": 0.0001,
-      "lighterEdgexArb": 0.00011600000000000001
+      "lighterEdgexArb": 0.00020400000000000003
     },
     {
       "contractId": "10000095",
@@ -563,10 +694,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.000312,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000408,
+      "edgexGrvtArb": 0.000412,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000412
     },
     {
       "contractId": "10000096",
@@ -575,8 +710,11 @@
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
       "edgexFunding": 0.0001,
-      "asterFunding": -0.00013305,
-      "edgexAsterArb": 0.00023305
+      "grvtFunding": -0.000228,
+      "asterFunding": -0.00013095,
+      "edgexGrvtArb": 0.000328,
+      "edgexAsterArb": 0.00023095,
+      "grvtAsterArb": -0.00009705
     },
     {
       "contractId": "10000097",
@@ -585,8 +723,24 @@
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.0007729999999999999,
       "asterFunding": 0.0001,
-      "edgexAsterArb": 0
+      "edgexGrvtArb": 0.000873,
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.000873
+    },
+    {
+      "contractId": "10000098",
+      "symbol": "POPCAT",
+      "contractName": "POPCATUSD",
+      "fundingRateIntervalMin": null,
+      "fundingInterestRate": null,
+      "lighterFunding": 0.00009599999999999999,
+      "edgexFunding": 0.0001,
+      "grvtFunding": -0.000339,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000435,
+      "edgexGrvtArb": 0.000439
     },
     {
       "contractId": "10000103",
@@ -596,7 +750,10 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "lighterEdgexArb": -0.000004000000000000016
+      "grvtFunding": -0.000439,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000535,
+      "edgexGrvtArb": 0.000539
     },
     {
       "contractId": "10000107",
@@ -606,7 +763,10 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "lighterEdgexArb": -0.000004000000000000016
+      "grvtFunding": -0.000505,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.000601,
+      "edgexGrvtArb": 0.0006050000000000001
     },
     {
       "contractId": "10000164",
@@ -614,11 +774,11 @@
       "contractName": "YZYUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.000336,
+      "lighterFunding": 0,
       "edgexFunding": 0.00009972,
       "asterFunding": 0,
-      "lighterEdgexArb": -0.00043572,
-      "lighterAsterArb": -0.000336,
+      "lighterEdgexArb": -0.00009972,
+      "lighterAsterArb": 0,
       "edgexAsterArb": 0.00009972
     },
     {
@@ -627,12 +787,16 @@
       "contractName": "AVNTUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.00009599999999999999,
+      "lighterFunding": -0.000064,
       "edgexFunding": 0.0001,
-      "asterFunding": 0.00367484,
-      "lighterEdgexArb": -0.000004000000000000016,
-      "lighterAsterArb": -0.00357884,
-      "edgexAsterArb": -0.00357484
+      "grvtFunding": -0.000335,
+      "asterFunding": 0.00358856,
+      "lighterEdgexArb": -0.000164,
+      "lighterGrvtArb": 0.00027100000000000003,
+      "edgexGrvtArb": 0.000435,
+      "lighterAsterArb": -0.00365256,
+      "edgexAsterArb": -0.0034885600000000004,
+      "grvtAsterArb": -0.00392356
     },
     {
       "contractId": "10000168",
@@ -640,12 +804,12 @@
       "contractName": "XPLUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.0015279999999999998,
-      "edgexFunding": -0.00096256,
+      "lighterFunding": 0.0007040000000000001,
+      "edgexFunding": -0.00095868,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": 0.0024905599999999997,
-      "lighterAsterArb": 0.0014279999999999998,
-      "edgexAsterArb": -0.00106256
+      "lighterEdgexArb": 0.0016626800000000001,
+      "lighterAsterArb": 0.000604,
+      "edgexAsterArb": -0.00105868
     },
     {
       "contractId": "10000169",
@@ -653,12 +817,16 @@
       "contractName": "ASTERUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.001312,
-      "edgexFunding": 0.00075184,
-      "asterFunding": 0.00278688,
-      "lighterEdgexArb": 0.00056016,
-      "lighterAsterArb": -0.0014748799999999998,
-      "edgexAsterArb": -0.0020350399999999997
+      "lighterFunding": 0.00148,
+      "edgexFunding": 0.000752,
+      "grvtFunding": 0.0016189999999999998,
+      "asterFunding": 0.00287602,
+      "lighterEdgexArb": 0.000728,
+      "lighterGrvtArb": -0.0001389999999999998,
+      "edgexGrvtArb": -0.0008669999999999998,
+      "lighterAsterArb": -0.00139602,
+      "edgexAsterArb": -0.00212402,
+      "grvtAsterArb": -0.0012570200000000002
     },
     {
       "contractId": "10000170",
@@ -666,12 +834,12 @@
       "contractName": "0GUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.0007920000000000001,
-      "edgexFunding": -0.00360702,
+      "lighterFunding": -0.000952,
+      "edgexFunding": -0.00359944,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": 0.0028150199999999997,
-      "lighterAsterArb": -0.0008920000000000001,
-      "edgexAsterArb": -0.0037070199999999997
+      "lighterEdgexArb": 0.00264744,
+      "lighterAsterArb": -0.001052,
+      "edgexAsterArb": -0.00369944
     },
     {
       "contractId": "10000194",
@@ -679,12 +847,16 @@
       "contractName": "LINEAUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.00016,
+      "lighterFunding": 0.000112,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.00037,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": 0.00006000000000000001,
-      "lighterAsterArb": 0.00006000000000000001,
-      "edgexAsterArb": 0
+      "lighterEdgexArb": 0.000011999999999999994,
+      "lighterGrvtArb": 0.000482,
+      "edgexGrvtArb": 0.00047,
+      "lighterAsterArb": 0.000011999999999999994,
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.00047
     },
     {
       "contractId": "10000195",
@@ -692,9 +864,9 @@
       "contractName": "BLESSUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "edgexFunding": 0.00032464,
-      "asterFunding": 0.00182376,
-      "edgexAsterArb": -0.00149912
+      "edgexFunding": 0.0004203,
+      "asterFunding": 0.00179966,
+      "edgexAsterArb": -0.00137936
     },
     {
       "contractId": "10000214",
@@ -702,9 +874,9 @@
       "contractName": "RESOLVUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.000712,
-      "edgexFunding": -0.00198044,
-      "lighterEdgexArb": 0.00126844
+      "lighterFunding": -0.000056,
+      "edgexFunding": -0.00192854,
+      "lighterEdgexArb": 0.00187254
     },
     {
       "contractId": "10000216",
@@ -712,12 +884,12 @@
       "contractName": "ZORAUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.001448,
-      "edgexFunding": -0.0033015,
+      "lighterFunding": -0.001488,
+      "edgexFunding": -0.0033324,
       "asterFunding": 0.0001,
-      "lighterEdgexArb": 0.0018535000000000001,
-      "lighterAsterArb": -0.0015480000000000001,
-      "edgexAsterArb": -0.0034015
+      "lighterEdgexArb": 0.0018444000000000002,
+      "lighterAsterArb": -0.001588,
+      "edgexAsterArb": -0.0034324
     },
     {
       "contractId": "10000217",
@@ -727,7 +899,10 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
-      "lighterEdgexArb": -0.000004000000000000016
+      "grvtFunding": -0.000484,
+      "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.00058,
+      "edgexGrvtArb": 0.000584
     },
     {
       "contractId": "10000220",
@@ -737,10 +912,14 @@
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
       "edgexFunding": 0.0001,
+      "grvtFunding": -0.001066,
       "asterFunding": 0.0001,
       "lighterEdgexArb": -0.000004000000000000016,
+      "lighterGrvtArb": 0.001162,
+      "edgexGrvtArb": 0.0011660000000000002,
       "lighterAsterArb": -0.000004000000000000016,
-      "edgexAsterArb": 0
+      "edgexAsterArb": 0,
+      "grvtAsterArb": -0.0011660000000000002
     },
     {
       "contractId": "10000221",
@@ -748,12 +927,12 @@
       "contractName": "BCHUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": 0.000008,
-      "edgexFunding": -0.00011512,
+      "lighterFunding": 0.000072,
+      "edgexFunding": -0.00011466,
       "asterFunding": 0,
-      "lighterEdgexArb": 0.00012312,
-      "lighterAsterArb": 0.000008,
-      "edgexAsterArb": -0.00011512
+      "lighterEdgexArb": 0.00018666,
+      "lighterAsterArb": 0.000072,
+      "edgexAsterArb": -0.00011466
     },
     {
       "contractId": "10000222",
@@ -762,8 +941,8 @@
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
       "lighterFunding": 0.00009599999999999999,
-      "edgexFunding": 0.00375,
-      "lighterEdgexArb": -0.0036539999999999997
+      "edgexFunding": 0.00366774,
+      "lighterEdgexArb": -0.00357174
     },
     {
       "contractId": "10000227",
@@ -784,13 +963,13 @@
       "contractName": "PYTHUSD",
       "fundingRateIntervalMin": null,
       "fundingInterestRate": null,
-      "lighterFunding": -0.0004,
+      "lighterFunding": -0.000448,
       "edgexFunding": 0.0001,
-      "asterFunding": 0.00008262,
-      "lighterEdgexArb": -0.0005,
-      "lighterAsterArb": -0.00048262,
-      "edgexAsterArb": 0.00001738
+      "asterFunding": 0.00008156,
+      "lighterEdgexArb": -0.000548,
+      "lighterAsterArb": -0.00052956,
+      "edgexAsterArb": 0.000018440000000000006
     }
   ],
-  "lastUpdated": "2025-09-25T01:59:11.189Z"
+  "lastUpdated": "2025-09-25T02:06:21.183Z"
 }
