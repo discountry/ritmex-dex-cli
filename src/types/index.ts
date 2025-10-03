@@ -4,3 +4,4 @@ export * from "./table";
 export * from "./grvt";
 export * from "./aster";
 export * from "./backpack";
+export * from "./hyperliquid";

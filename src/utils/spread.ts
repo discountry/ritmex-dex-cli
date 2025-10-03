@@ -34,26 +34,33 @@ export const calculateTopSpreads = (rows: TableRow[], limit: number, capitalUsd:
     const available = rateEntries.filter((entry) => entry.value !== undefined) as Array<RateEntry & { value: number }>;
     if (available.length < 2) return;
 
-    const high = available.reduce((max, current) => (current.value > max.value ? current : max));
-    const low = available.reduce((min, current) => (current.value < min.value ? current : min));
+    // Generate all profitable pairs for this symbol (higher funding as seller, lower as buyer)
+    for (let i = 0; i < available.length - 1; i += 1) {
+      for (let j = i + 1; j < available.length; j += 1) {
+        const a = available[i]!;
+        const b = available[j]!;
 
-    const diff = high.value - low.value;
-    if (diff <= 0) return;
+        const high: typeof a = a.value >= b.value ? a : b;
+        const low: typeof a = a.value >= b.value ? b : a;
+        const diff = high.value - low.value;
+        if (diff <= 0) continue;
 
-    const estimated24hProfit = diff * 3;
-    const estimated24hProfitAmount = capitalUsd > 0 ? capitalUsd * (estimated24hProfit) : undefined;
+        const estimated24hProfit = diff * 3;
+        const estimated24hProfitAmount = capitalUsd > 0 ? capitalUsd * (estimated24hProfit) : undefined;
 
-    entries.push({
-      symbol: row.symbol,
-      diff,
-      high: { exchange: EXCHANGE_LABELS[high.exchange], rate: high.value },
-      low: { exchange: EXCHANGE_LABELS[low.exchange], rate: low.value },
-      estimated24hProfit,
-      estimated24hProfitAmount,
-    });
+        entries.push({
+          symbol: row.symbol,
+          diff,
+          high: { exchange: EXCHANGE_LABELS[high.exchange], rate: high.value },
+          low: { exchange: EXCHANGE_LABELS[low.exchange], rate: low.value },
+          estimated24hProfit,
+          estimated24hProfitAmount,
+        });
+      }
+    }
   });
 
   return entries
-    .sort((a, b) => Math.abs(b.diff) - Math.abs(a.diff))
+    .sort((a, b) => b.diff - a.diff)
     .slice(0, limit);
 };

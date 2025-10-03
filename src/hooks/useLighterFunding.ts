@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fetchLighterFundingRates, fetchBinanceFundingInfo } from "../services/http/lighter";
+import { fetchHyperliquidPredictedFundings, mapHlPerpToEntries } from "../services/http/hyperliquid";
 import { LIGHTER_REFRESH_MS } from "../utils/constants";
 import type { LighterFundingEntry } from "../types/lighter";
 
@@ -27,12 +28,20 @@ export const useLighterFunding = (): LighterFundingState => {
     setState((prev) => ({ ...prev, isRefreshing: true }));
 
     try {
-      const [rates, binanceInfo] = await Promise.all([
+      const [rates, binanceInfo, hlPredicted] = await Promise.all([
         fetchLighterFundingRates(),
         fetchBinanceFundingInfo().catch(() => new Map<string, number>()),
+        fetchHyperliquidPredictedFundings().catch(() => []),
       ]);
 
-      const normalized = rates.map((entry) => {
+      const hlEntries = mapHlPerpToEntries(hlPredicted).map((e) => ({
+        market_id: -1,
+        exchange: "hyperliquid",
+        symbol: e.symbol,
+        rate: e.rate,
+      })) as LighterFundingEntry[];
+
+      const normalized = [...rates, ...hlEntries].map((entry) => {
         if (entry.exchange === "binance") {
           const symbolKey = entry.symbol.toUpperCase();
           const hours = binanceInfo.get(symbolKey) ?? 8;
