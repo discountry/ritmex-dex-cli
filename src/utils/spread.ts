@@ -4,6 +4,7 @@ import { loadConfigSync } from "./config";
 const EXCHANGE_LABELS = {
   lighter: "Lighter",
   binance: "Binance",
+  hyperliquid: "Hyperliquid",
   edgex: "Edgex",
   grvt: "GRVT",
   aster: "Aster",
@@ -25,6 +26,7 @@ export const calculateTopSpreads = (rows: TableRow[], limit: number, capitalUsd:
     const rateEntries: RateEntry[] = [];
     if (enabledExchanges.includes("lighter")) rateEntries.push({ key: "lighterFunding", exchange: "lighter", value: row.lighterFunding });
     if (enabledExchanges.includes("binance")) rateEntries.push({ key: "binanceFunding", exchange: "binance", value: row.binanceFunding });
+    if (enabledExchanges.includes("hyperliquid")) rateEntries.push({ key: "hyperliquidFunding", exchange: "hyperliquid", value: row.hyperliquidFunding });
     if (enabledExchanges.includes("edgex")) rateEntries.push({ key: "edgexFunding", exchange: "edgex", value: row.edgexFunding });
     if (enabledExchanges.includes("grvt")) rateEntries.push({ key: "grvtFunding", exchange: "grvt", value: row.grvtFunding });
     if (enabledExchanges.includes("aster")) rateEntries.push({ key: "asterFunding", exchange: "aster", value: row.asterFunding });

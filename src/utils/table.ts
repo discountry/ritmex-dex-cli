@@ -15,12 +15,16 @@ export const buildTableRows = (
   const lighterMap = new Map<string, number>();
   const binanceMap = new Map<string, number>();
   const asterMap = new Map<string, number>();
+  const hyperliquidMap = new Map<string, number>();
   const backpackMap = new Map<string, number>();
 
   lighterRates.forEach((entry) => {
     const symbolKey = entry.symbol.toUpperCase();
     if (entry.exchange === "lighter") {
       lighterMap.set(symbolKey, entry.rate);
+    }
+    if (entry.exchange === "hyperliquid") {
+      hyperliquidMap.set(symbolKey, entry.rate);
     }
     if (entry.exchange === "binance") {
       binanceMap.set(symbolKey, entry.rate);
@@ -43,6 +47,7 @@ export const buildTableRows = (
       const symbol = normaliseSymbol(entry.contractName);
       const lighterFunding = lighterMap.get(symbol);
       const edgexFunding = entry.fundingRate;
+      const hyperliquidFunding = hyperliquidMap.get(symbol);
       const grvtFunding = grvtFundingBySymbol[symbol];
       const asterFunding = asterMap.get(symbol);
       const backpackFunding = backpackMap.get(symbol);
@@ -50,6 +55,7 @@ export const buildTableRows = (
 
       const availableRates = [
         lighterFunding,
+        hyperliquidFunding,
         edgexFunding,
         grvtFunding,
         asterFunding,
@@ -77,6 +83,10 @@ export const buildTableRows = (
 
       if (binanceFunding !== undefined) {
         row.binanceFunding = binanceFunding;
+      }
+
+      if (hyperliquidFunding !== undefined) {
+        row.hyperliquidFunding = hyperliquidFunding;
       }
 
       if (edgexFunding !== undefined) {
@@ -152,6 +162,9 @@ export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow =
         break;
       case "binanceFunding":
         accumulator[column] = formatRateValue(row.binanceFunding);
+        break;
+      case "hyperliquidFunding":
+        accumulator[column] = formatRateValue(row.hyperliquidFunding);
         break;
       case "edgexFunding":
         accumulator[column] = formatRateValue(row.edgexFunding);

@@ -6,6 +6,7 @@ export interface TableRow {
   fundingInterestRate: number | null;
   lighterFunding?: number;
   binanceFunding?: number;
+  hyperliquidFunding?: number;
   edgexFunding?: number;
   grvtFunding?: number;
   asterFunding?: number;
@@ -32,6 +33,7 @@ export type SortKey = keyof Pick<
   | "symbol"
   | "lighterFunding"
   | "binanceFunding"
+  | "hyperliquidFunding"
   | "edgexFunding"
   | "grvtFunding"
   | "asterFunding"

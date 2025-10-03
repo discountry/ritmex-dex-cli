@@ -31,6 +31,7 @@ const buildHeaders = (enabled: ExchangeKey[]): HeaderConfig[] => {
   const fundingCols: Array<{ key: SortKey; label: string }> = [];
   if (enabled.includes("lighter")) fundingCols.push({ key: "lighterFunding", label: "Lighter" });
   if (enabled.includes("binance")) fundingCols.push({ key: "binanceFunding", label: "Binance" });
+  if (enabled.includes("hyperliquid")) fundingCols.push({ key: "hyperliquidFunding", label: "Hyperliquid" });
   if (enabled.includes("edgex")) fundingCols.push({ key: "edgexFunding", label: "Edgex" });
   if (enabled.includes("grvt")) fundingCols.push({ key: "grvtFunding", label: "GRVT" });
   if (enabled.includes("aster")) fundingCols.push({ key: "asterFunding", label: "Aster" });

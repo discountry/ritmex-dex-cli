@@ -33,11 +33,20 @@ export const useLighterFunding = (): LighterFundingState => {
       ]);
 
       const normalized = rates.map((entry) => {
-        if (entry.exchange !== "binance") return entry;
-        const symbolKey = entry.symbol.toUpperCase();
-        const hours = binanceInfo.get(symbolKey) ?? 8;
-        const eightHourRate = typeof entry.rate === "number" ? entry.rate * (8 / hours) : entry.rate;
-        return { ...entry, rate: eightHourRate } as typeof entry;
+        if (entry.exchange === "binance") {
+          const symbolKey = entry.symbol.toUpperCase();
+          const hours = binanceInfo.get(symbolKey) ?? 8;
+          const eightHourRate = typeof entry.rate === "number" ? entry.rate * (8 / hours) : entry.rate;
+          return { ...entry, rate: eightHourRate } as typeof entry;
+        }
+
+        if (entry.exchange === "hyperliquid") {
+          // Hyperliquid funds hourly; normalize to 8h equivalent
+          const eightHourRate = typeof entry.rate === "number" ? entry.rate * 8 : entry.rate;
+          return { ...entry, rate: eightHourRate } as typeof entry;
+        }
+
+        return entry;
       });
 
       setState({ rates: normalized, error: null, isRefreshing: false, lastUpdated: new Date() });
