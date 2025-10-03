@@ -11,11 +11,17 @@ export const buildTableRows = (
   asterRates: AsterFundingEntry[]
 ): TableRow[] => {
   const lighterMap = new Map<string, number>();
+  const binanceMap = new Map<string, number>();
   const asterMap = new Map<string, number>();
 
   lighterRates.forEach((entry) => {
     const symbolKey = entry.symbol.toUpperCase();
-    lighterMap.set(symbolKey, entry.rate);
+    if (entry.exchange === "lighter") {
+      lighterMap.set(symbolKey, entry.rate);
+    }
+    if (entry.exchange === "binance") {
+      binanceMap.set(symbolKey, entry.rate);
+    }
   });
 
   asterRates.forEach((entry) => {
@@ -31,8 +37,9 @@ export const buildTableRows = (
       const edgexFunding = entry.fundingRate;
       const grvtFunding = grvtFundingBySymbol[symbol];
       const asterFunding = asterMap.get(symbol);
+      const binanceFunding = binanceMap.get(symbol);
 
-      const availableRates = [lighterFunding, edgexFunding, grvtFunding, asterFunding].filter(
+      const availableRates = [lighterFunding, edgexFunding, grvtFunding, asterFunding, binanceFunding].filter(
         (value) => value !== undefined
       );
 
@@ -50,6 +57,10 @@ export const buildTableRows = (
 
       if (lighterFunding !== undefined) {
         row.lighterFunding = lighterFunding;
+      }
+
+      if (binanceFunding !== undefined) {
+        row.binanceFunding = binanceFunding;
       }
 
       if (edgexFunding !== undefined) {
@@ -76,6 +87,14 @@ export const buildTableRows = (
         row.edgexGrvtArb = edgexFunding - grvtFunding;
       }
 
+      if (binanceFunding !== undefined && edgexFunding !== undefined) {
+        row.binanceEdgexArb = binanceFunding - edgexFunding;
+      }
+
+      if (binanceFunding !== undefined && grvtFunding !== undefined) {
+        row.binanceGrvtArb = binanceFunding - grvtFunding;
+      }
+
       if (lighterFunding !== undefined && asterFunding !== undefined) {
         row.lighterAsterArb = lighterFunding - asterFunding;
       }
@@ -86,6 +105,14 @@ export const buildTableRows = (
 
       if (grvtFunding !== undefined && asterFunding !== undefined) {
         row.grvtAsterArb = grvtFunding - asterFunding;
+      }
+
+      if (binanceFunding !== undefined && asterFunding !== undefined) {
+        row.binanceAsterArb = binanceFunding - asterFunding;
+      }
+
+      if (binanceFunding !== undefined && lighterFunding !== undefined) {
+        row.binanceLighterArb = binanceFunding - lighterFunding;
       }
 
       accumulator.push(row);
@@ -102,6 +129,9 @@ export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow =
         break;
       case "lighterFunding":
         accumulator[column] = formatRateValue(row.lighterFunding);
+        break;
+      case "binanceFunding":
+        accumulator[column] = formatRateValue(row.binanceFunding);
         break;
       case "edgexFunding":
         accumulator[column] = formatRateValue(row.edgexFunding);
@@ -121,6 +151,12 @@ export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow =
       case "edgexGrvtArb":
         accumulator[column] = formatArbValue(row.edgexGrvtArb);
         break;
+      case "binanceEdgexArb":
+        accumulator[column] = formatArbValue(row.binanceEdgexArb);
+        break;
+      case "binanceGrvtArb":
+        accumulator[column] = formatArbValue(row.binanceGrvtArb);
+        break;
     case "lighterAsterArb":
       accumulator[column] = formatArbValue(row.lighterAsterArb);
       break;
@@ -130,6 +166,12 @@ export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow =
     case "grvtAsterArb":
       accumulator[column] = formatArbValue(row.grvtAsterArb);
       break;
+      case "binanceAsterArb":
+        accumulator[column] = formatArbValue(row.binanceAsterArb);
+        break;
+      case "binanceLighterArb":
+        accumulator[column] = formatArbValue(row.binanceLighterArb);
+        break;
       default: {
         const exhaustiveCheck: never = column;
         throw new Error(`Unhandled column key: ${exhaustiveCheck}`);

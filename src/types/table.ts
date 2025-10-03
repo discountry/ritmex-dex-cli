@@ -5,6 +5,7 @@ export interface TableRow {
   fundingRateIntervalMin: number | null;
   fundingInterestRate: number | null;
   lighterFunding?: number;
+  binanceFunding?: number;
   edgexFunding?: number;
   grvtFunding?: number;
   asterFunding?: number;
@@ -14,6 +15,10 @@ export interface TableRow {
   lighterAsterArb?: number;
   edgexAsterArb?: number;
   grvtAsterArb?: number;
+  binanceEdgexArb?: number;
+  binanceGrvtArb?: number;
+  binanceAsterArb?: number;
+  binanceLighterArb?: number;
 }
 
 export interface FundingSnapshot {
@@ -25,6 +30,7 @@ export type SortKey = keyof Pick<
   TableRow,
   | "symbol"
   | "lighterFunding"
+  | "binanceFunding"
   | "edgexFunding"
   | "grvtFunding"
   | "asterFunding"
@@ -34,6 +40,10 @@ export type SortKey = keyof Pick<
   | "lighterAsterArb"
   | "edgexAsterArb"
   | "grvtAsterArb"
+  | "binanceEdgexArb"
+  | "binanceGrvtArb"
+  | "binanceAsterArb"
+  | "binanceLighterArb"
 >;
 export type SortDirection = "asc" | "desc";
 

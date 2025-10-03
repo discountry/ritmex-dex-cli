@@ -15,25 +15,54 @@ import { buildColumnLabels, buildDisplayRow } from "./src/utils/table";
 import { calculateTopSpreads } from "./src/utils/spread";
 import { loadSnapshotSync } from "./src/utils/snapshot";
 import { DISPLAY_LIMIT } from "./src/utils/constants";
+import { loadConfigSync, type ExchangeKey } from "./src/utils/config";
 import type { DisplayRow, SortKey } from "./src/types/table";
 
 const SNAPSHOT = loadSnapshotSync();
 const INITIAL_ROWS = SNAPSHOT?.rows ?? [];
 const INITIAL_LAST_UPDATED = SNAPSHOT?.lastUpdated ? new Date(SNAPSHOT.lastUpdated) : null;
 
-const HEADERS: HeaderConfig[] = [
-  { key: "symbol", label: "Symbol", shortcut: "1" },
-  { key: "lighterFunding", label: "Lighter", shortcut: "2" },
-  { key: "edgexFunding", label: "Edgex", shortcut: "3" },
-  { key: "grvtFunding", label: "GRVT", shortcut: "4" },
-  { key: "asterFunding", label: "Aster", shortcut: "5" },
-  { key: "lighterEdgexArb", label: "L-E Arb", shortcut: "6" },
-  { key: "lighterGrvtArb", label: "L-G Arb", shortcut: "7" },
-  { key: "edgexGrvtArb", label: "E-G Arb", shortcut: "8" },
-  { key: "lighterAsterArb", label: "L-A Arb", shortcut: "9" },
-  { key: "edgexAsterArb", label: "E-A Arb", shortcut: "0" },
-  { key: "grvtAsterArb", label: "G-A Arb", shortcut: "-" },
-];
+const CONFIG = loadConfigSync();
+
+const buildHeaders = (enabled: ExchangeKey[]): HeaderConfig[] => {
+  const headers: HeaderConfig[] = [{ key: "symbol", label: "Symbol", shortcut: "1" }];
+
+  const fundingCols: Array<{ key: SortKey; label: string }> = [];
+  if (enabled.includes("lighter")) fundingCols.push({ key: "lighterFunding", label: "Lighter" });
+  if (enabled.includes("binance")) fundingCols.push({ key: "binanceFunding", label: "Binance" });
+  if (enabled.includes("edgex")) fundingCols.push({ key: "edgexFunding", label: "Edgex" });
+  if (enabled.includes("grvt")) fundingCols.push({ key: "grvtFunding", label: "GRVT" });
+  if (enabled.includes("aster")) fundingCols.push({ key: "asterFunding", label: "Aster" });
+
+  let shortcutCode = 50; // '2'
+  fundingCols.forEach((col) => {
+    headers.push({ key: col.key, label: col.label, shortcut: String.fromCharCode(shortcutCode) });
+    shortcutCode += 1;
+  });
+
+  // Arb columns only for pairs present in enabled set
+  const has = (k: ExchangeKey) => enabled.includes(k);
+  const pushArb = (key: SortKey, label: string) => {
+    headers.push({ key, label, shortcut: String.fromCharCode(shortcutCode) });
+    shortcutCode += 1;
+  };
+
+  if (has("lighter") && has("edgex")) pushArb("lighterEdgexArb", "L-E Arb");
+  if (has("lighter") && has("grvt")) pushArb("lighterGrvtArb", "L-G Arb");
+  if (has("edgex") && has("grvt")) pushArb("edgexGrvtArb", "E-G Arb");
+  if (has("lighter") && has("aster")) pushArb("lighterAsterArb", "L-A Arb");
+  if (has("edgex") && has("aster")) pushArb("edgexAsterArb", "E-A Arb");
+  if (has("grvt") && has("aster")) pushArb("grvtAsterArb", "G-A Arb");
+
+  if (has("binance") && has("edgex")) pushArb("binanceEdgexArb", "B-E Arb");
+  if (has("binance") && has("grvt")) pushArb("binanceGrvtArb", "B-G Arb");
+  if (has("binance") && has("aster")) pushArb("binanceAsterArb", "B-A Arb");
+  if (has("binance") && has("lighter")) pushArb("binanceLighterArb", "B-L Arb");
+
+  return headers;
+};
+
+const HEADERS: HeaderConfig[] = buildHeaders(CONFIG.enabledExchanges);
 
 const DISPLAY_COLUMNS = HEADERS.map((header) => header.key) as SortKey[];
 

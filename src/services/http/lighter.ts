@@ -14,6 +14,7 @@ export async function fetchLighterFundingRates(): Promise<LighterFundingEntry[]>
   }
 
   const payload = (await response.json()) as LighterFundingResponse;
-  const entries = payload.funding_rates?.filter((entry) => entry.exchange === "lighter");
-  return entries ?? [];
+  // Return all exchanges (e.g., lighter, binance). Filtering will be handled upstream.
+  const entries = payload.funding_rates ?? [];
+  return entries;
 }
