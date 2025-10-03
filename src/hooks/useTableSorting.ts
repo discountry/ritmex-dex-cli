@@ -50,9 +50,11 @@ const compareRows = (a: TableRow, b: TableRow, key: SortKey, direction: "asc" | 
 };
 
 export const useTableSorting = (rows: TableRow[], headers: HeaderConfig[]): TableSortingResult => {
-  const defaultIndex = headers.findIndex((header) => ARB_KEYS.includes(header.key));
+  // Prefer lighter funding by default if present, otherwise fall back to first ARB key, then last column
+  const lighterIndex = headers.findIndex((header) => header.key === ("lighterFunding" as SortKey));
+  const arbIndex = headers.findIndex((header) => ARB_KEYS.includes(header.key));
   const fallbackIndex = headers.length ? headers.length - 1 : 0;
-  const initialIndex = defaultIndex >= 0 ? defaultIndex : fallbackIndex;
+  const initialIndex = lighterIndex >= 0 ? lighterIndex : arbIndex >= 0 ? arbIndex : fallbackIndex;
   const initialKey = (headers[initialIndex]?.key ?? "symbol") as SortKey;
   const [sortState, setSortState] = useState<SortState>({ key: initialKey, direction: "desc" });
   const [selectedHeaderIndex, setSelectedHeaderIndex] = useState<number>(initialIndex);

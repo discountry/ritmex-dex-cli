@@ -8,6 +8,7 @@ import { useEdgexFunding } from "./src/hooks/useEdgexFunding";
 import { useGrvtFunding } from "./src/hooks/useGrvtFunding";
 import { useAsterFunding } from "./src/hooks/useAsterFunding";
 import { useFundingRows } from "./src/hooks/useFundingRows";
+import { useBackpackFunding } from "./src/hooks/useBackpackFunding";
 import { useTableSorting, type HeaderConfig } from "./src/hooks/useTableSorting";
 import { useKeyboardNavigation } from "./src/hooks/useKeyboardNavigation";
 import { useSnapshotPersistence } from "./src/hooks/useSnapshotPersistence";
@@ -33,6 +34,7 @@ const buildHeaders = (enabled: ExchangeKey[]): HeaderConfig[] => {
   if (enabled.includes("edgex")) fundingCols.push({ key: "edgexFunding", label: "Edgex" });
   if (enabled.includes("grvt")) fundingCols.push({ key: "grvtFunding", label: "GRVT" });
   if (enabled.includes("aster")) fundingCols.push({ key: "asterFunding", label: "Aster" });
+  if (enabled.includes("backpack")) fundingCols.push({ key: "backpackFunding", label: "Backpack" });
 
   let shortcutCode = 50; // '2'
   fundingCols.forEach((col) => {
@@ -40,25 +42,7 @@ const buildHeaders = (enabled: ExchangeKey[]): HeaderConfig[] => {
     shortcutCode += 1;
   });
 
-  // Arb columns only for pairs present in enabled set
-  const has = (k: ExchangeKey) => enabled.includes(k);
-  const pushArb = (key: SortKey, label: string) => {
-    headers.push({ key, label, shortcut: String.fromCharCode(shortcutCode) });
-    shortcutCode += 1;
-  };
-
-  if (has("lighter") && has("edgex")) pushArb("lighterEdgexArb", "L-E Arb");
-  if (has("lighter") && has("grvt")) pushArb("lighterGrvtArb", "L-G Arb");
-  if (has("edgex") && has("grvt")) pushArb("edgexGrvtArb", "E-G Arb");
-  if (has("lighter") && has("aster")) pushArb("lighterAsterArb", "L-A Arb");
-  if (has("edgex") && has("aster")) pushArb("edgexAsterArb", "E-A Arb");
-  if (has("grvt") && has("aster")) pushArb("grvtAsterArb", "G-A Arb");
-
-  if (has("binance") && has("edgex")) pushArb("binanceEdgexArb", "B-E Arb");
-  if (has("binance") && has("grvt")) pushArb("binanceGrvtArb", "B-G Arb");
-  if (has("binance") && has("aster")) pushArb("binanceAsterArb", "B-A Arb");
-  if (has("binance") && has("lighter")) pushArb("binanceLighterArb", "B-L Arb");
-
+  // Remove arbitrage/difference columns per request; show only per-exchange funding columns
   return headers;
 };
 
@@ -83,12 +67,14 @@ const App: React.FC = () => {
   const edgex = useEdgexFunding();
   const grvt = useGrvtFunding();
   const aster = useAsterFunding();
+  const backpack = useBackpackFunding();
 
   const { rows, lastUpdated, status: rowStatus } = useFundingRows({
     edgexFunding: edgex.data,
     lighterRates: lighter.rates,
     grvtFunding: grvt.data,
     asterRates: aster.rates,
+    backpackRates: backpack.rates,
     initialRows: INITIAL_ROWS,
     initialLastUpdated: INITIAL_LAST_UPDATED,
   });
@@ -133,7 +119,7 @@ const App: React.FC = () => {
   });
 
   const totalRows = limitedRows.length;
-  const fundingError = edgex.error ?? lighter.error ?? grvt.error ?? aster.error ?? null;
+  const fundingError = edgex.error ?? lighter.error ?? grvt.error ?? aster.error ?? backpack.error ?? null;
   const hasEdgexData = Object.keys(edgex.data).length > 0;
 
   const statusMessage = useMemo(() => {
@@ -169,15 +155,19 @@ const App: React.FC = () => {
       return "Refreshing Aster funding data...";
     }
 
+    if (backpack.isRefreshing) {
+      return "Refreshing Backpack funding data...";
+    }
+
     if (rowStatus === "empty") {
       return "No overlapping contracts found.";
     }
 
     return "";
-  }, [edgex.isConnecting, edgex.isConnected, hasEdgexData, lighter.isRefreshing, grvt.isRefreshing, rowStatus]);
+  }, [edgex.isConnecting, edgex.isConnected, hasEdgexData, lighter.isRefreshing, grvt.isRefreshing, aster.isRefreshing, backpack.isRefreshing, rowStatus]);
 
   const topSpreads = useMemo(
-    () => calculateTopSpreads(sorting.sortedRows, 5, CAPITAL_USD),
+    () => calculateTopSpreads(sorting.sortedRows, 10, CAPITAL_USD),
     [sorting.sortedRows]
   );
 

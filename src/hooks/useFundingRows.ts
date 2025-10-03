@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { EdgexFundingEntry } from "../types/edgex";
 import type { LighterFundingEntry } from "../types/lighter";
 import type { TableRow } from "../types/table";
+import type { BackpackFundingEntry } from "../types/backpack";
 import type { AsterFundingEntry } from "../types/aster";
 import { buildTableRows } from "../utils/table";
 import { saveSnapshot } from "../utils/snapshot";
@@ -19,6 +20,7 @@ interface FundingRowsArgs {
   lighterRates: LighterFundingEntry[];
   grvtFunding: Record<string, number>;
   asterRates: AsterFundingEntry[];
+  backpackRates?: BackpackFundingEntry[];
   initialRows: TableRow[];
   initialLastUpdated: Date | null;
 }
@@ -34,6 +36,7 @@ export const useFundingRows = ({
   lighterRates,
   grvtFunding,
   asterRates,
+  backpackRates = [],
   initialRows,
   initialLastUpdated,
 }: FundingRowsArgs): FundingRowsState => {
@@ -46,8 +49,9 @@ export const useFundingRows = ({
     const hasLighterData = lighterRates.length > 0;
     const hasGrvtData = Object.keys(grvtFunding).length > 0;
     const hasAsterData = asterRates.length > 0;
+    const hasBackpackData = backpackRates.length > 0;
 
-    if (!hasEdgexData && !hasLighterData && !hasGrvtData && !hasAsterData) {
+    if (!hasEdgexData && !hasLighterData && !hasGrvtData && !hasAsterData && !hasBackpackData) {
       setStatus(initialRows.length ? "ready" : "idle");
       return;
     }
@@ -66,7 +70,7 @@ export const useFundingRows = ({
       setStatus("waiting-grvt");
     }
 
-    const nextRows = buildTableRows(edgexFunding, lighterRates, grvtFunding, asterRates);
+    const nextRows = buildTableRows(edgexFunding, lighterRates, grvtFunding, asterRates, backpackRates);
 
     if (!nextRows.length) {
       setRows([]);
@@ -80,7 +84,7 @@ export const useFundingRows = ({
     const timestamp = new Date();
     setLastUpdated(timestamp);
     void saveSnapshot({ rows: nextRows, lastUpdated: timestamp.toISOString() });
-  }, [edgexFunding, lighterRates, grvtFunding, asterRates, initialRows.length]);
+  }, [edgexFunding, lighterRates, grvtFunding, asterRates, backpackRates, initialRows.length]);
 
   return { rows, lastUpdated, status };
 };

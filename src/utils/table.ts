@@ -2,17 +2,20 @@ import type { EdgexFundingEntry } from "../types/edgex";
 import type { LighterFundingEntry } from "../types/lighter";
 import type { DisplayRow, SortKey, TableRow } from "../types/table";
 import type { AsterFundingEntry } from "../types/aster";
+import type { BackpackFundingEntry } from "../types/backpack";
 import { formatArbValue, formatRateValue, normaliseSymbol } from "./format";
 
 export const buildTableRows = (
   edgexFundingById: Record<string, EdgexFundingEntry | undefined>,
   lighterRates: LighterFundingEntry[],
   grvtFundingBySymbol: Record<string, number>,
-  asterRates: AsterFundingEntry[]
+  asterRates: AsterFundingEntry[],
+  backpackRates: BackpackFundingEntry[] = []
 ): TableRow[] => {
   const lighterMap = new Map<string, number>();
   const binanceMap = new Map<string, number>();
   const asterMap = new Map<string, number>();
+  const backpackMap = new Map<string, number>();
 
   lighterRates.forEach((entry) => {
     const symbolKey = entry.symbol.toUpperCase();
@@ -29,6 +32,11 @@ export const buildTableRows = (
     asterMap.set(symbolKey, entry.rate);
   });
 
+  backpackRates.forEach((entry) => {
+    const symbolKey = entry.symbol.toUpperCase();
+    backpackMap.set(symbolKey, entry.rate);
+  });
+
   return Object.values(edgexFundingById)
     .filter((entry): entry is EdgexFundingEntry => Boolean(entry))
     .reduce<TableRow[]>((accumulator, entry) => {
@@ -37,9 +45,17 @@ export const buildTableRows = (
       const edgexFunding = entry.fundingRate;
       const grvtFunding = grvtFundingBySymbol[symbol];
       const asterFunding = asterMap.get(symbol);
+      const backpackFunding = backpackMap.get(symbol);
       const binanceFunding = binanceMap.get(symbol);
 
-      const availableRates = [lighterFunding, edgexFunding, grvtFunding, asterFunding, binanceFunding].filter(
+      const availableRates = [
+        lighterFunding,
+        edgexFunding,
+        grvtFunding,
+        asterFunding,
+        binanceFunding,
+        backpackFunding,
+      ].filter(
         (value) => value !== undefined
       );
 
@@ -73,6 +89,10 @@ export const buildTableRows = (
 
       if (asterFunding !== undefined) {
         row.asterFunding = asterFunding;
+      }
+
+      if (backpackFunding !== undefined) {
+        row.backpackFunding = backpackFunding;
       }
 
       if (lighterFunding !== undefined && edgexFunding !== undefined) {
@@ -138,6 +158,9 @@ export const buildDisplayRow = (row: TableRow, columns: SortKey[]): DisplayRow =
         break;
       case "grvtFunding":
         accumulator[column] = formatRateValue(row.grvtFunding);
+        break;
+      case "backpackFunding":
+        accumulator[column] = formatRateValue(row.backpackFunding);
         break;
     case "asterFunding":
       accumulator[column] = formatRateValue(row.asterFunding);

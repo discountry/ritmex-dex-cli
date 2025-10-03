@@ -1,14 +1,14 @@
 import { readFileSync } from "fs";
 import path from "path";
 
-export type ExchangeKey = "lighter" | "binance" | "edgex" | "grvt" | "aster";
+export type ExchangeKey = "lighter" | "binance" | "edgex" | "grvt" | "aster" | "backpack";
 
 export interface AppConfig {
   enabledExchanges: ExchangeKey[];
 }
 
 const DEFAULT_CONFIG: AppConfig = {
-  enabledExchanges: ["lighter", "binance", "grvt"],
+  enabledExchanges: ["lighter", "binance", "edgex", "grvt", "aster", "backpack"],
 };
 
 export const loadConfigSync = (): AppConfig => {
@@ -19,7 +19,7 @@ export const loadConfigSync = (): AppConfig => {
 
     const enabled = Array.isArray(parsed.enabledExchanges)
       ? (parsed.enabledExchanges.filter((e) =>
-          ["lighter", "binance", "edgex", "grvt", "aster"].includes(e as string)
+          ["lighter", "binance", "edgex", "grvt", "aster", "backpack"].includes(e as string)
         ) as ExchangeKey[])
       : DEFAULT_CONFIG.enabledExchanges;
 

@@ -9,6 +9,7 @@ export interface TableRow {
   edgexFunding?: number;
   grvtFunding?: number;
   asterFunding?: number;
+  backpackFunding?: number;
   lighterEdgexArb?: number;
   lighterGrvtArb?: number;
   edgexGrvtArb?: number;
@@ -34,6 +35,7 @@ export type SortKey = keyof Pick<
   | "edgexFunding"
   | "grvtFunding"
   | "asterFunding"
+  | "backpackFunding"
   | "lighterEdgexArb"
   | "lighterGrvtArb"
   | "edgexGrvtArb"
