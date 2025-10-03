@@ -66,6 +66,18 @@ const HEADERS: HeaderConfig[] = buildHeaders(CONFIG.enabledExchanges);
 
 const DISPLAY_COLUMNS = HEADERS.map((header) => header.key) as SortKey[];
 
+const parseCapitalFromArgv = (): number => {
+  const argv = process.argv.slice(2);
+  const idx = argv.findIndex((a) => a === "--capital" || a === "-c");
+  if (idx === -1) return 0;
+  const next = argv[idx + 1];
+  if (!next) return 0;
+  const value = Number(next.replace(/[$,]/g, ""));
+  return Number.isFinite(value) && value > 0 ? value : 0;
+};
+
+const CAPITAL_USD = parseCapitalFromArgv();
+
 const App: React.FC = () => {
   const lighter = useLighterFunding();
   const edgex = useEdgexFunding();
@@ -165,7 +177,7 @@ const App: React.FC = () => {
   }, [edgex.isConnecting, edgex.isConnected, hasEdgexData, lighter.isRefreshing, grvt.isRefreshing, rowStatus]);
 
   const topSpreads = useMemo(
-    () => calculateTopSpreads(sorting.sortedRows, 10),
+    () => calculateTopSpreads(sorting.sortedRows, 5, CAPITAL_USD),
     [sorting.sortedRows]
   );
 
@@ -173,7 +185,7 @@ const App: React.FC = () => {
     <Box flexDirection="column">
       <Header
         title="Ritmex Funding Monitor"
-        instructions="Use ← → or press 1-0/- to choose a column, Enter to toggle sort."
+        instructions={`Use ← → or press 1-0/- to choose a column, Enter to toggle sort.${CAPITAL_USD ? ` Capital: $${CAPITAL_USD}` : ""}`}
         lastUpdated={lastUpdated}
         fundingError={fundingError}
       />

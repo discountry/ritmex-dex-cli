@@ -66,4 +66,5 @@ export interface SpreadEntry {
     rate: number;
   };
   estimated24hProfit: number;
+  estimated24hProfitAmount?: number;
 }

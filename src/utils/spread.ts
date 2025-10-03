@@ -17,7 +17,7 @@ interface RateEntry {
   value?: number;
 }
 
-export const calculateTopSpreads = (rows: TableRow[], limit: number): SpreadEntry[] => {
+export const calculateTopSpreads = (rows: TableRow[], limit: number, capitalUsd: number = 0): SpreadEntry[] => {
   const entries: SpreadEntry[] = [];
   const { enabledExchanges } = loadConfigSync();
 
@@ -39,6 +39,7 @@ export const calculateTopSpreads = (rows: TableRow[], limit: number): SpreadEntr
     if (diff <= 0) return;
 
     const estimated24hProfit = diff * 3;
+    const estimated24hProfitAmount = capitalUsd > 0 ? capitalUsd * (estimated24hProfit) : undefined;
 
     entries.push({
       symbol: row.symbol,
@@ -46,6 +47,7 @@ export const calculateTopSpreads = (rows: TableRow[], limit: number): SpreadEntr
       high: { exchange: EXCHANGE_LABELS[high.exchange], rate: high.value },
       low: { exchange: EXCHANGE_LABELS[low.exchange], rate: low.value },
       estimated24hProfit,
+      estimated24hProfitAmount,
     });
   });
 

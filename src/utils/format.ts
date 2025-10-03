@@ -30,3 +30,11 @@ const formatPercentWithSign = (value: number | undefined): string => {
 export const formatRateValue = (value: number | undefined): string => formatPercentWithSign(value);
 
 export const formatArbValue = (value: number | undefined): string => formatPercentWithSign(value);
+
+export const formatUsd = (value: number | undefined): string => {
+  if (value === undefined || !Number.isFinite(value)) return "--";
+  const sign = value >= 0 ? "" : "-";
+  const abs = Math.abs(value);
+  const formatted = abs >= 1000 ? abs.toLocaleString(undefined, { maximumFractionDigits: 2 }) : abs.toFixed(2);
+  return `${sign}$${formatted}`;
+};

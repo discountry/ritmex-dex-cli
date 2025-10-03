@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "ink-table";
 import type { SpreadEntry } from "../types/table";
-import { formatRateValue } from "../utils/format";
+import { formatRateValue, formatUsd } from "../utils/format";
 
 interface TopSpreadListProps {
   entries: SpreadEntry[];
@@ -17,7 +17,8 @@ export const TopSpreadList: React.FC<TopSpreadListProps> = ({ entries }) => (
       "Buy Rate": formatRateValue(entry.low.rate),
       Spread: formatRateValue(entry.diff),
       "Estimate 24H profit%": formatRateValue(entry.estimated24hProfit),
+      "Estimate 24H profit": formatUsd(entry.estimated24hProfitAmount),
     }))}
-    columns={["Symbol", "Sell Exchange", "Sell Rate", "Buy Exchange", "Buy Rate", "Spread", "Estimate 24H profit%"]}
+    columns={["Symbol", "Sell Exchange", "Sell Rate", "Buy Exchange", "Buy Rate", "Spread", "Estimate 24H profit%", "Estimate 24H profit"]}
   />
 );
