@@ -29,17 +29,6 @@ const ARB_KEYS: SortKey[] = [
   "binanceLighterArb",
 ];
 
-// Funding rate columns that should always sort by absolute value in descending order
-const RATE_KEYS: SortKey[] = [
-  "lighterFunding",
-  "binanceFunding",
-  "hyperliquidFunding",
-  "edgexFunding",
-  "grvtFunding",
-  "asterFunding",
-  "backpackFunding",
-];
-
 const compareRows = (a: TableRow, b: TableRow, key: SortKey, direction: "asc" | "desc") => {
   const factor = direction === "asc" ? 1 : -1;
   const aValue = a[key];
@@ -71,18 +60,7 @@ export const useTableSorting = (rows: TableRow[], headers: HeaderConfig[]): Tabl
   const [selectedHeaderIndex, setSelectedHeaderIndex] = useState<number>(initialIndex);
 
   const sortedRows = useMemo(() => {
-    const sorted = [...rows].sort((a, b) => compareRows(a, b, sortState.key, sortState.direction));
-
-    // For arbitrage and funding rate columns, force absolute value sorting (desc)
-    if (ARB_KEYS.includes(sortState.key) || RATE_KEYS.includes(sortState.key)) {
-      sorted.sort((a, b) => {
-        const aValue = typeof a[sortState.key] === "number" ? (a[sortState.key] as number) : 0;
-        const bValue = typeof b[sortState.key] === "number" ? (b[sortState.key] as number) : 0;
-        return Math.abs(bValue) - Math.abs(aValue);
-      });
-    }
-
-    return sorted;
+    return [...rows].sort((a, b) => compareRows(a, b, sortState.key, sortState.direction));
   }, [rows, sortState]);
 
   const selectPrevious = () => {
@@ -99,11 +77,6 @@ export const useTableSorting = (rows: TableRow[], headers: HeaderConfig[]): Tabl
 
     setSelectedHeaderIndex(index);
     setSortState((prev) => {
-      // For arbitrage and funding rate columns, always lock to absolute value descending
-      if (ARB_KEYS.includes(header.key) || RATE_KEYS.includes(header.key)) {
-        return { key: header.key, direction: "desc" };
-      }
-
       if (prev.key === header.key) {
         return { key: prev.key, direction: prev.direction === "asc" ? "desc" : "asc" };
       }
