@@ -31,9 +31,10 @@ export const buildTableRows = (
 
   // Use direct Binance rates instead of from Lighter
   binanceRates.forEach((entry) => {
-    const symbolKey = entry.symbol.toUpperCase();
+    const symbolKey = normaliseSymbol(entry.symbol);
     binanceMap.set(symbolKey, entry.rate);
   });
+  
 
   asterRates.forEach((entry) => {
     const symbolKey = entry.symbol.toUpperCase();

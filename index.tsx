@@ -166,6 +166,7 @@ const App: React.FC = () => {
     if (binance.isRefreshing) {
       return "Refreshing Binance funding data...";
     }
+    
 
     if (rowStatus === "empty") {
       return "No overlapping contracts found.";

@@ -57,6 +57,7 @@ export const useBinanceFunding = (): BinanceFundingState => {
           } as BinanceFundingEntry;
         });
 
+      
       setState({ 
         rates: filteredRates, 
         error: null, 

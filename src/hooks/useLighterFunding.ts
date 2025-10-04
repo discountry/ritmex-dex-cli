@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { fetchLighterFundingRates, fetchBinanceFundingInfo } from "../services/http/lighter";
+import { fetchLighterFundingRates } from "../services/http/lighter";
 import { fetchHyperliquidPredictedFundings, mapHlPerpToEntries } from "../services/http/hyperliquid";
 import { LIGHTER_REFRESH_MS } from "../utils/constants";
 import type { LighterFundingEntry } from "../types/lighter";
@@ -28,9 +28,8 @@ export const useLighterFunding = (): LighterFundingState => {
     setState((prev) => ({ ...prev, isRefreshing: true }));
 
     try {
-      const [rates, binanceInfo, hlPredicted] = await Promise.all([
+      const [rates, hlPredicted] = await Promise.all([
         fetchLighterFundingRates(),
-        fetchBinanceFundingInfo().catch(() => new Map<string, number>()),
         fetchHyperliquidPredictedFundings().catch(() => []),
       ]);
 
@@ -42,13 +41,6 @@ export const useLighterFunding = (): LighterFundingState => {
       })) as LighterFundingEntry[];
 
       const normalized = [...rates, ...hlEntries].map((entry) => {
-        if (entry.exchange === "binance") {
-          const symbolKey = entry.symbol.toUpperCase();
-          const hours = binanceInfo.get(symbolKey) ?? 8;
-          const eightHourRate = typeof entry.rate === "number" ? entry.rate * (8 / hours) : entry.rate;
-          return { ...entry, rate: eightHourRate } as typeof entry;
-        }
-
         if (entry.exchange === "hyperliquid") {
           // Hyperliquid funds hourly; normalize to 8h equivalent
           const eightHourRate = typeof entry.rate === "number" ? entry.rate * 8 : entry.rate;
