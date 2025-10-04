@@ -9,6 +9,7 @@ import { useGrvtFunding } from "./src/hooks/useGrvtFunding";
 import { useAsterFunding } from "./src/hooks/useAsterFunding";
 import { useFundingRows } from "./src/hooks/useFundingRows";
 import { useBackpackFunding } from "./src/hooks/useBackpackFunding";
+import { useBinanceFunding } from "./src/hooks/useBinanceFunding";
 import { useTableSorting, type HeaderConfig } from "./src/hooks/useTableSorting";
 import { useKeyboardNavigation } from "./src/hooks/useKeyboardNavigation";
 import { useSnapshotPersistence } from "./src/hooks/useSnapshotPersistence";
@@ -69,6 +70,7 @@ const App: React.FC = () => {
   const grvt = useGrvtFunding();
   const aster = useAsterFunding();
   const backpack = useBackpackFunding();
+  const binance = useBinanceFunding();
 
   const { rows, lastUpdated, status: rowStatus } = useFundingRows({
     edgexFunding: edgex.data,
@@ -76,6 +78,7 @@ const App: React.FC = () => {
     grvtFunding: grvt.data,
     asterRates: aster.rates,
     backpackRates: backpack.rates,
+    binanceRates: binance.rates,
     initialRows: INITIAL_ROWS,
     initialLastUpdated: INITIAL_LAST_UPDATED,
   });
@@ -120,7 +123,7 @@ const App: React.FC = () => {
   });
 
   const totalRows = limitedRows.length;
-  const fundingError = edgex.error ?? lighter.error ?? grvt.error ?? aster.error ?? backpack.error ?? null;
+  const fundingError = edgex.error ?? lighter.error ?? grvt.error ?? aster.error ?? backpack.error ?? binance.error ?? null;
   const hasEdgexData = Object.keys(edgex.data).length > 0;
 
   const statusMessage = useMemo(() => {
@@ -160,12 +163,16 @@ const App: React.FC = () => {
       return "Refreshing Backpack funding data...";
     }
 
+    if (binance.isRefreshing) {
+      return "Refreshing Binance funding data...";
+    }
+
     if (rowStatus === "empty") {
       return "No overlapping contracts found.";
     }
 
     return "";
-  }, [edgex.isConnecting, edgex.isConnected, hasEdgexData, lighter.isRefreshing, grvt.isRefreshing, aster.isRefreshing, backpack.isRefreshing, rowStatus]);
+  }, [edgex.isConnecting, edgex.isConnected, hasEdgexData, lighter.isRefreshing, grvt.isRefreshing, aster.isRefreshing, backpack.isRefreshing, binance.isRefreshing, rowStatus]);
 
   const topSpreads = useMemo(
     () => calculateTopSpreads(sorting.sortedRows, 10, CAPITAL_USD),

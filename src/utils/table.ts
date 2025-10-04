@@ -10,7 +10,8 @@ export const buildTableRows = (
   lighterRates: LighterFundingEntry[],
   grvtFundingBySymbol: Record<string, number>,
   asterRates: AsterFundingEntry[],
-  backpackRates: BackpackFundingEntry[] = []
+  backpackRates: BackpackFundingEntry[] = [],
+  binanceRates: Array<{ symbol: string; rate: number }> = []
 ): TableRow[] => {
   const lighterMap = new Map<string, number>();
   const binanceMap = new Map<string, number>();
@@ -26,9 +27,12 @@ export const buildTableRows = (
     if (entry.exchange === "hyperliquid") {
       hyperliquidMap.set(symbolKey, entry.rate);
     }
-    if (entry.exchange === "binance") {
-      binanceMap.set(symbolKey, entry.rate);
-    }
+  });
+
+  // Use direct Binance rates instead of from Lighter
+  binanceRates.forEach((entry) => {
+    const symbolKey = entry.symbol.toUpperCase();
+    binanceMap.set(symbolKey, entry.rate);
   });
 
   asterRates.forEach((entry) => {

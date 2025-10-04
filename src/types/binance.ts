@@ -9,4 +9,16 @@ export interface BinanceFundingInfoEntry {
 
 export type BinanceFundingInfoResponse = BinanceFundingInfoEntry[];
 
+export interface BinancePremiumIndexEntry {
+  symbol: string;
+  markPrice: string;
+  indexPrice: string;
+  estimatedSettlePrice: string;
+  lastFundingRate: string;
+  interestRate: string;
+  nextFundingTime: number;
+  time: number;
+}
+
+export type BinancePremiumIndexResponse = BinancePremiumIndexEntry[];
 

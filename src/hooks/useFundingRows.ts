@@ -21,6 +21,7 @@ interface FundingRowsArgs {
   grvtFunding: Record<string, number>;
   asterRates: AsterFundingEntry[];
   backpackRates?: BackpackFundingEntry[];
+  binanceRates?: Array<{ symbol: string; rate: number }>;
   initialRows: TableRow[];
   initialLastUpdated: Date | null;
 }
@@ -37,6 +38,7 @@ export const useFundingRows = ({
   grvtFunding,
   asterRates,
   backpackRates = [],
+  binanceRates = [],
   initialRows,
   initialLastUpdated,
 }: FundingRowsArgs): FundingRowsState => {
@@ -70,7 +72,7 @@ export const useFundingRows = ({
       setStatus("waiting-grvt");
     }
 
-    const nextRows = buildTableRows(edgexFunding, lighterRates, grvtFunding, asterRates, backpackRates);
+    const nextRows = buildTableRows(edgexFunding, lighterRates, grvtFunding, asterRates, backpackRates, binanceRates);
 
     if (!nextRows.length) {
       setRows([]);
@@ -84,7 +86,7 @@ export const useFundingRows = ({
     const timestamp = new Date();
     setLastUpdated(timestamp);
     void saveSnapshot({ rows: nextRows, lastUpdated: timestamp.toISOString() });
-  }, [edgexFunding, lighterRates, grvtFunding, asterRates, backpackRates, initialRows.length]);
+  }, [edgexFunding, lighterRates, grvtFunding, asterRates, backpackRates, binanceRates, initialRows.length]);
 
   return { rows, lastUpdated, status };
 };
