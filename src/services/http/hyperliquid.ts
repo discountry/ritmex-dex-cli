@@ -3,6 +3,7 @@ import type {
   HyperliquidPredictedFundingsTuple,
   HyperliquidPredictedFundingPoint,
 } from "../../types/hyperliquid";
+import { convertHyperliquidSymbol } from "../../utils/format";
 
 const HYPERLIQUID_INFO_URL = "https://api.hyperliquid.xyz/info";
 
@@ -38,7 +39,8 @@ export function mapHlPerpToEntries(
 
   predicted.forEach((tuple: HyperliquidPredictedFundingsTuple) => {
     const [symbol, venues] = tuple;
-    const upper = symbol?.toUpperCase?.() ?? symbol;
+    // Convert symbol from internal format (kBONK) to standard format (1000BONK)
+    const normalizedSymbol = convertHyperliquidSymbol(symbol);
     if (!Array.isArray(venues)) return;
 
     for (const [venue, point] of venues) {
@@ -48,7 +50,7 @@ export function mapHlPerpToEntries(
 
       const raw = Number(p.fundingRate);
       if (!Number.isFinite(raw)) continue;
-      result.push({ symbol: upper, rate: raw, venue, fundingIntervalHours: p.fundingIntervalHours });
+      result.push({ symbol: normalizedSymbol, rate: raw, venue, fundingIntervalHours: p.fundingIntervalHours });
       break; // one HlPerp per symbol
     }
   });

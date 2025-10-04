@@ -33,22 +33,17 @@ export const useLighterFunding = (): LighterFundingState => {
         fetchHyperliquidPredictedFundings().catch(() => []),
       ]);
 
+      // Filter out Hyperliquid data from Lighter API - we'll use official API data only
+      const filteredRates = rates.filter(entry => entry.exchange !== "hyperliquid");
+
       const hlEntries = mapHlPerpToEntries(hlPredicted).map((e) => ({
         market_id: -1,
         exchange: "hyperliquid",
         symbol: e.symbol,
-        rate: e.rate,
+        rate: e.rate * 8, // Hyperliquid funds hourly; normalize to 8h equivalent
       })) as LighterFundingEntry[];
 
-      const normalized = [...rates, ...hlEntries].map((entry) => {
-        if (entry.exchange === "hyperliquid") {
-          // Hyperliquid funds hourly; normalize to 8h equivalent
-          const eightHourRate = typeof entry.rate === "number" ? entry.rate * 8 : entry.rate;
-          return { ...entry, rate: eightHourRate } as typeof entry;
-        }
-
-        return entry;
-      });
+      const normalized = [...filteredRates, ...hlEntries];
 
       setState({ rates: normalized, error: null, isRefreshing: false, lastUpdated: new Date() });
     } catch (error) {
