@@ -2,6 +2,13 @@
 
 基于 Bun + Ink 的终端 CLI，用于监控多交易所永续合约资金费率与跨所价差，帮助快速发现潜在套利机会。
 
+* [Aster 30% 手续费优惠注册链接](https://www.asterdex.com/zh-CN/referral/4665f3)
+* [Binance 手续费优惠注册链接](https://www.binance.com/join?ref=KNKCA9XC)
+* [GRVT 手续费优惠注册链接](https://grvt.io/exchange/sign-up?ref=sea)
+* [Backpack 手续费优惠注册链接](https://backpack.exchange/join/41d60948-2a75-4d16-b7e9-523df74f2904)
+* [edgex 手续费优惠注册链接](https://pro.edgex.exchange/referral/BULL)
+
+
 ### 支持的交易所
 - **edgeX**：WebSocket 实时行情与资金费率（自动重连，过滤名义仓位不足）。
 - **Lighter**：HTTP 资金费率接口，默认每 5 分钟刷新。
