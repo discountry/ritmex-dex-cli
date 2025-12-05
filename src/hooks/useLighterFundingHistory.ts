@@ -9,6 +9,7 @@ import {
   LIGHTER_HISTORY_FETCH_GAP_MS,
   LIGHTER_HISTORY_LOOKBACK_MS,
   LIGHTER_HISTORY_REFRESH_MS,
+  LIGHTER_EXCLUDED_SYMBOLS,
 } from "../utils/constants";
 import { parseNumber } from "../utils/format";
 import { delay } from "../utils/time";
@@ -68,11 +69,14 @@ const dedupeRows = (rows: LighterHistoryRow[]): LighterHistoryRow[] => {
   });
 };
 
+const filterExcludedRows = (rows: LighterHistoryRow[]): LighterHistoryRow[] =>
+  rows.filter((row) => !LIGHTER_EXCLUDED_SYMBOLS.has(row.symbol.toUpperCase()));
+
 export const useLighterFundingHistory = (): LighterHistoryState => {
   const [state, setState] = useState<LighterHistoryState>(() => {
     if (INITIAL_SNAPSHOT) {
       return {
-        rows: dedupeRows(INITIAL_SNAPSHOT.rows),
+        rows: filterExcludedRows(dedupeRows(INITIAL_SNAPSHOT.rows)),
         isRefreshing: false,
         error: null,
         lastUpdated: new Date(INITIAL_SNAPSHOT.lastUpdated),
@@ -126,7 +130,7 @@ export const useLighterFundingHistory = (): LighterHistoryState => {
             series,
           });
           setState({
-            rows: [...rows],
+            rows: filterExcludedRows([...rows]),
             error: failures.length ? `Partial data: ${failures.join("; ")}` : null,
             isRefreshing: true,
             lastUpdated: state.lastUpdated,
@@ -140,13 +144,13 @@ export const useLighterFundingHistory = (): LighterHistoryState => {
       }
 
       setState({
-        rows,
+        rows: filterExcludedRows(rows),
         error: failures.length ? `Partial data: ${failures.join("; ")}` : null,
         isRefreshing: false,
         lastUpdated: new Date(),
       });
       void saveLighterHistorySnapshot({
-        rows,
+        rows: filterExcludedRows(rows),
         lastUpdated: new Date().toISOString(),
       });
     } catch (error) {

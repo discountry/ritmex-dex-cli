@@ -1,4 +1,5 @@
 import { fetchLighterFundingRates } from "./lighter";
+import { LIGHTER_EXCLUDED_SYMBOLS } from "../../utils/constants";
 import type { LighterFundingHistoryResponse, LighterFundingPoint, LighterMarket } from "../../types/lighter-history";
 import type { LighterFundingEntry } from "../../types/lighter";
 
@@ -21,17 +22,14 @@ export async function fetchLighterMarkets(): Promise<LighterMarket[]> {
   return entries
     .filter(
       (entry): entry is LighterFundingEntry =>
-        entry.exchange === "lighter" &&
-        Number.isFinite(entry.market_id) &&
-        typeof (entry as { type?: string }).type === "string"
-        ? ((entry as { type?: string }).type ?? "").toLowerCase() === "crypto"
-        : true
+        entry.exchange === "lighter" && Number.isFinite(entry.market_id) && typeof entry.symbol === "string"
     )
     .map((entry) => ({
       marketId: entry.market_id,
       symbol: entry.symbol.toUpperCase(),
       currentRate: typeof entry.rate === "number" ? entry.rate : null,
-    }));
+    }))
+    .filter((entry) => !LIGHTER_EXCLUDED_SYMBOLS.has(entry.symbol));
 }
 
 export async function fetchLighterFundingHistory({

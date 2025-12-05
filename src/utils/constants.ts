@@ -8,3 +8,29 @@ export const LIGHTER_HISTORY_REFRESH_MS = 10 * 60 * 1000; // refresh every 10 mi
 export const LIGHTER_HISTORY_COUNT_BACK = 7 * 24;
 export const LIGHTER_HISTORY_CACHE_MS = 24 * 60 * 60 * 1000; // 24 hours
 export const LIGHTER_HISTORY_DISPLAY_LIMIT = 15;
+
+export const LIGHTER_EXCLUDED_SYMBOLS = new Set<string>([
+  // Stocks
+  "COIN",
+  "HOOD",
+  "NVDA",
+  "TSLA",
+  "PLTR",
+  "GOOGL",
+  "META",
+  "AAPL",
+  "MSFT",
+  "AMZN",
+  // FX pairs
+  "EURUSD",
+  "GBPUSD",
+  "USDCAD",
+  "USDCHF",
+  "USDJPY",
+  "USDKRW",
+  "AUDUSD",
+  "NZDUSD",
+  // Metals
+  "XAU",
+  "XAG",
+]);
