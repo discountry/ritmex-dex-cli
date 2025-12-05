@@ -3,6 +3,7 @@ export interface LighterFundingEntry {
   exchange: string;
   symbol: string;
   rate: number;
+  type?: string;
 }
 
 export interface LighterFundingResponse {

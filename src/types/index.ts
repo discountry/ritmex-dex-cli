@@ -5,3 +5,4 @@ export * from "./grvt";
 export * from "./aster";
 export * from "./backpack";
 export * from "./hyperliquid";
+export * from "./lighter-history";

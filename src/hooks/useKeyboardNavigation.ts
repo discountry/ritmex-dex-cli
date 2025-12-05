@@ -1,8 +1,7 @@
 import { useInput } from "ink";
-import type { HeaderConfig } from "./useTableSorting";
 
-interface KeyboardNavigationArgs {
-  headers: HeaderConfig[];
+interface KeyboardNavigationArgs<THeader extends { shortcut: string }> {
+  headers: THeader[];
   selectedHeaderIndex: number;
   selectNext: () => void;
   selectPrevious: () => void;
@@ -13,7 +12,7 @@ interface KeyboardNavigationArgs {
   pageDown?: () => void;
 }
 
-export const useKeyboardNavigation = ({
+export const useKeyboardNavigation = <THeader extends { shortcut: string }>({
   headers,
   selectedHeaderIndex,
   selectNext,
@@ -23,7 +22,7 @@ export const useKeyboardNavigation = ({
   decrement,
   pageUp,
   pageDown,
-}: KeyboardNavigationArgs) => {
+}: KeyboardNavigationArgs<THeader>) => {
   useInput((input, key) => {
     if (key.upArrow && decrement) {
       decrement();

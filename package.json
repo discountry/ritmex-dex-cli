@@ -7,7 +7,8 @@
     "ink-table": "./src/components/InkTable.tsx"
   },
   "scripts": {
-    "start": "bun run index.tsx -- --capital 1000"
+    "start": "bun run index.tsx -- --capital 1000",
+    "lighter-history": "bun run lighter-history.tsx"
   },
   "devDependencies": {
     "@types/bun": "latest"
@@ -16,6 +17,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@pppp606/ink-chart": "^0.2.1",
     "ink": "^6.3.1",
     "ink-table": "^3.1.0",
     "react": "^19.1.1"
