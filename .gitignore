@@ -29,3 +29,6 @@ Thumbs.db
 .env.*
 !.env.example
 *.local
+
+/data
+/data/*
