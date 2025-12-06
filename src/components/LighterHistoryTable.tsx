@@ -18,20 +18,16 @@ const COLUMN_WIDTHS = {
   average: 14,
   sevenDayRate: 14,
   sevenDayProfit: 16,
+  annualized: 14,
 };
+
+const COLUMN_GAP = 1;
 
 const INLINE_POINTS = 40;
 
-const formatHeaderLabel = (
-  label: string,
-  width: number,
-  active: boolean,
-  descending: boolean,
-  alignRight: boolean
-) => {
+const formatHeaderLabel = (label: string, active: boolean, descending: boolean) => {
   const suffix = active ? (descending ? " v" : " ^") : "";
-  const content = `${label}${suffix}`;
-  return alignRight ? content.padStart(width) : content.padEnd(width);
+  return `${label}${suffix}`;
 };
 
 const colorForRate = (value: number | null) => {
@@ -60,14 +56,24 @@ export const LighterHistoryTable: React.FC<LighterHistoryTableProps> = ({
             ? COLUMN_WIDTHS.average
             : header.key === "sevenDayRate"
             ? COLUMN_WIDTHS.sevenDayRate
-            : COLUMN_WIDTHS.sevenDayProfit;
+            : header.key === "sevenDayProfit"
+            ? COLUMN_WIDTHS.sevenDayProfit
+            : COLUMN_WIDTHS.annualized;
 
         return (
-          <Text key={header.key} color={color}>
-            {formatHeaderLabel(header.label, width, isActive, sortState.direction === "desc", alignRight)}
-          </Text>
+          <Box
+            key={header.key}
+            marginRight={index === headers.length - 1 ? 0 : COLUMN_GAP}
+            width={width}
+            justifyContent={alignRight ? "flex-end" : "flex-start"}
+          >
+            <Text color={color}>
+              {formatHeaderLabel(header.label, isActive, sortState.direction === "desc")}
+            </Text>
+          </Box>
         );
       })}
+      <Box width={2} />
       <Text>Trend (7d)</Text>
     </Box>
   );
@@ -87,19 +93,27 @@ interface RowItemProps {
 }
 
 const LighterHistoryRowItem: React.FC<RowItemProps> = React.memo(({ row }) => {
-  const current = formatRateValue(row.currentRate ?? undefined).padStart(COLUMN_WIDTHS.current);
-  const average = formatRateValue(row.averageRate ?? undefined).padStart(COLUMN_WIDTHS.average);
-  const sevenDayRate = formatRateValue(row.sevenDayRate ?? undefined).padStart(COLUMN_WIDTHS.sevenDayRate);
-  const sevenDayProfit = formatUsd(row.sevenDayProfit ?? undefined).padStart(COLUMN_WIDTHS.sevenDayProfit);
-  const symbol = row.symbol.padEnd(COLUMN_WIDTHS.symbol);
   return (
     <Box flexDirection="column" marginBottom={1}>
       <Box>
-        <Text>{symbol}</Text>
-        <Text color={colorForRate(row.currentRate)}>{current}</Text>
-        <Text color={colorForRate(row.averageRate)}>{average}</Text>
-        <Text color={colorForRate(row.sevenDayRate)}>{sevenDayRate}</Text>
-        <Text color="yellow">{sevenDayProfit}</Text>
+        <Box width={COLUMN_WIDTHS.symbol} marginRight={COLUMN_GAP}>
+          <Text>{row.symbol}</Text>
+        </Box>
+        <Box width={COLUMN_WIDTHS.current} marginRight={COLUMN_GAP} justifyContent="flex-end">
+          <Text color={colorForRate(row.currentRate)}>{formatRateValue(row.currentRate ?? undefined)}</Text>
+        </Box>
+        <Box width={COLUMN_WIDTHS.average} marginRight={COLUMN_GAP} justifyContent="flex-end">
+          <Text color={colorForRate(row.averageRate)}>{formatRateValue(row.averageRate ?? undefined)}</Text>
+        </Box>
+        <Box width={COLUMN_WIDTHS.sevenDayRate} marginRight={COLUMN_GAP} justifyContent="flex-end">
+          <Text color={colorForRate(row.sevenDayRate)}>{formatRateValue(row.sevenDayRate ?? undefined)}</Text>
+        </Box>
+        <Box width={COLUMN_WIDTHS.sevenDayProfit} marginRight={COLUMN_GAP} justifyContent="flex-end">
+          <Text color="yellow">{formatUsd(row.sevenDayProfit ?? undefined)}</Text>
+        </Box>
+        <Box width={COLUMN_WIDTHS.annualized} justifyContent="flex-end">
+          <Text color={colorForRate(row.annualizedRate)}>{formatRateValue(row.annualizedRate ?? undefined)}</Text>
+        </Box>
         {row.series.length ? (
           <Box marginLeft={2}>
             <InlineBarSeries data={row.series} />
@@ -120,6 +134,7 @@ const LighterHistoryRowItem: React.FC<RowItemProps> = React.memo(({ row }) => {
     prev.row.averageRate === next.row.averageRate &&
     prev.row.sevenDayRate === next.row.sevenDayRate &&
     prev.row.sevenDayProfit === next.row.sevenDayProfit &&
+    prev.row.annualizedRate === next.row.annualizedRate &&
     prev.row.series === next.row.series
   );
 });

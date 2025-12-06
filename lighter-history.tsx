@@ -13,6 +13,7 @@ const HEADERS: HistoryHeaderConfig[] = [
   { key: "averageRate", label: "7d Avg", shortcut: "3" },
   { key: "sevenDayRate", label: "7d Rate", shortcut: "4" },
   { key: "sevenDayProfit", label: "7d Profit", shortcut: "5" },
+  { key: "annualizedRate", label: "Est APR", shortcut: "6" },
 ];
 
 const DEFAULT_PRINCIPAL = 1000;
@@ -66,7 +67,7 @@ const App: React.FC = () => {
     <Box flexDirection="column">
       <Header
         title="Lighter 7d Funding History"
-        instructions={`Use ← → or press 1-5 to choose a column, Enter to toggle sort. Capital: $${PRINCIPAL_USD}`}
+        instructions={`Use ← → or press 1-6 to choose a column, Enter to toggle sort. Capital: $${PRINCIPAL_USD} (2x notional for neutral carry)`}
         lastUpdated={history.lastUpdated}
         fundingError={history.error}
       />

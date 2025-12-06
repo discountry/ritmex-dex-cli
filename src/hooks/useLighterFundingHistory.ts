@@ -55,7 +55,7 @@ const total = (values: number[]): number | null => {
 };
 
 const addDerivedFields = (
-  row: Omit<LighterHistoryRow, "sevenDayRate" | "sevenDayProfit">,
+  row: Omit<LighterHistoryRow, "sevenDayRate" | "sevenDayProfit" | "annualizedRate">,
   principalUsd: number
 ): LighterHistoryRow => {
   const series = row.series ?? [];
@@ -65,6 +65,12 @@ const addDerivedFields = (
   const sevenDayRate = total(series);
   const sevenDayProfit =
     sevenDayRate !== null && principalUsd > 0 ? principalUsd * (sevenDayRate / 100) : null;
+  // Neutral strategy ties up double capital (short + spot), so annualized return is based on 2x principal.
+  const effectiveCapital = principalUsd > 0 ? principalUsd * 2 : null;
+  const annualizedRate =
+    sevenDayProfit !== null && effectiveCapital
+      ? (sevenDayProfit / effectiveCapital) * (365 / 7) * 100
+      : null;
 
   return {
     ...row,
@@ -72,6 +78,7 @@ const addDerivedFields = (
     currentRate,
     sevenDayRate,
     sevenDayProfit,
+    annualizedRate,
   };
 };
 

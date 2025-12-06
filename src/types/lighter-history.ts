@@ -26,9 +26,16 @@ export interface LighterHistoryRow {
   series: number[];
   sevenDayRate: number | null;
   sevenDayProfit: number | null;
+  annualizedRate: number | null;
 }
 
-export type LighterHistorySortKey = "symbol" | "currentRate" | "averageRate" | "sevenDayRate" | "sevenDayProfit";
+export type LighterHistorySortKey =
+  | "symbol"
+  | "currentRate"
+  | "averageRate"
+  | "sevenDayRate"
+  | "sevenDayProfit"
+  | "annualizedRate";
 
 export interface LighterHistorySnapshot {
   rows: LighterHistoryRow[];
