@@ -30,10 +30,11 @@ const formatPercentWithSign = (value: number | undefined): string => {
     return "--";
   }
 
-  const percent = value * 100;
-  const formatted = percent.toFixed(4);
+  // Rates from providers are already expressed in percent units (e.g., 0.0012 = 0.0012%),
+  // so we avoid re-scaling and only format/sign them.
+  const formatted = value.toFixed(4);
 
-  if (percent > 0) {
+  if (value > 0) {
     return `+${formatted}%`;
   }
 

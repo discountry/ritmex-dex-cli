@@ -24,9 +24,11 @@ export interface LighterHistoryRow {
   currentRate: number | null;
   averageRate: number | null;
   series: number[];
+  sevenDayRate: number | null;
+  sevenDayProfit: number | null;
 }
 
-export type LighterHistorySortKey = "symbol" | "currentRate" | "averageRate";
+export type LighterHistorySortKey = "symbol" | "currentRate" | "averageRate" | "sevenDayRate" | "sevenDayProfit";
 
 export interface LighterHistorySnapshot {
   rows: LighterHistoryRow[];

@@ -11,10 +11,27 @@ const HEADERS: HistoryHeaderConfig[] = [
   { key: "symbol", label: "Symbol", shortcut: "1" },
   { key: "currentRate", label: "Current", shortcut: "2" },
   { key: "averageRate", label: "7d Avg", shortcut: "3" },
+  { key: "sevenDayRate", label: "7d Rate", shortcut: "4" },
+  { key: "sevenDayProfit", label: "7d Profit", shortcut: "5" },
 ];
 
+const DEFAULT_PRINCIPAL = 1000;
+
+const parsePrincipalFromArgv = (): number => {
+  const argv = process.argv.slice(2);
+  const idx = argv.findIndex((arg) => arg === "--capital" || arg === "-c" || arg === "--principal");
+  if (idx === -1) return DEFAULT_PRINCIPAL;
+  const next = argv[idx + 1];
+  if (!next) return DEFAULT_PRINCIPAL;
+  const value = Number(next.replace(/[$,]/g, ""));
+  if (!Number.isFinite(value) || value <= 0) return DEFAULT_PRINCIPAL;
+  return value;
+};
+
+const PRINCIPAL_USD = parsePrincipalFromArgv();
+
 const App: React.FC = () => {
-  const history = useLighterFundingHistory();
+  const history = useLighterFundingHistory(PRINCIPAL_USD);
   const sorting = useLighterHistorySorting(history.rows, HEADERS);
   const visibleRows = useMemo(
     () => sorting.sortedRows.slice(0, LIGHTER_HISTORY_DISPLAY_LIMIT),
@@ -49,7 +66,7 @@ const App: React.FC = () => {
     <Box flexDirection="column">
       <Header
         title="Lighter 7d Funding History"
-        instructions="Use ← → or press 1-3 to choose a column, Enter to toggle sort."
+        instructions={`Use ← → or press 1-5 to choose a column, Enter to toggle sort. Capital: $${PRINCIPAL_USD}`}
         lastUpdated={history.lastUpdated}
         fundingError={history.error}
       />

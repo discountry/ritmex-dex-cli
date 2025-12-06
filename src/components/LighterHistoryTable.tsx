@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text } from "ink";
 import type { LighterHistoryRow } from "../types/lighter-history";
 import type { HistoryHeaderConfig, HistorySortState } from "../hooks/useLighterHistorySorting";
-import { formatRateValue } from "../utils/format";
+import { formatRateValue, formatUsd } from "../utils/format";
 import { downsampleSeries } from "../utils/series";
 
 interface LighterHistoryTableProps {
@@ -16,13 +16,22 @@ const COLUMN_WIDTHS = {
   symbol: 12,
   current: 14,
   average: 14,
+  sevenDayRate: 14,
+  sevenDayProfit: 16,
 };
 
 const INLINE_POINTS = 40;
 
-const formatHeaderLabel = (label: string, width: number, active: boolean, descending: boolean) => {
+const formatHeaderLabel = (
+  label: string,
+  width: number,
+  active: boolean,
+  descending: boolean,
+  alignRight: boolean
+) => {
   const suffix = active ? (descending ? " v" : " ^") : "";
-  return `${label}${suffix}`.padEnd(width);
+  const content = `${label}${suffix}`;
+  return alignRight ? content.padStart(width) : content.padEnd(width);
 };
 
 const colorForRate = (value: number | null) => {
@@ -41,16 +50,21 @@ export const LighterHistoryTable: React.FC<LighterHistoryTableProps> = ({
       {headers.map((header, index) => {
         const isActive = header.key === sortState.key;
         const color = index === selectedHeaderIndex ? "cyan" : isActive ? "green" : "white";
+        const alignRight = header.key !== "symbol";
         const width =
           header.key === "symbol"
             ? COLUMN_WIDTHS.symbol
             : header.key === "currentRate"
             ? COLUMN_WIDTHS.current
-            : COLUMN_WIDTHS.average;
+            : header.key === "averageRate"
+            ? COLUMN_WIDTHS.average
+            : header.key === "sevenDayRate"
+            ? COLUMN_WIDTHS.sevenDayRate
+            : COLUMN_WIDTHS.sevenDayProfit;
 
         return (
           <Text key={header.key} color={color}>
-            {formatHeaderLabel(header.label, width, isActive, sortState.direction === "desc")}
+            {formatHeaderLabel(header.label, width, isActive, sortState.direction === "desc", alignRight)}
           </Text>
         );
       })}
@@ -75,6 +89,8 @@ interface RowItemProps {
 const LighterHistoryRowItem: React.FC<RowItemProps> = React.memo(({ row }) => {
   const current = formatRateValue(row.currentRate ?? undefined).padStart(COLUMN_WIDTHS.current);
   const average = formatRateValue(row.averageRate ?? undefined).padStart(COLUMN_WIDTHS.average);
+  const sevenDayRate = formatRateValue(row.sevenDayRate ?? undefined).padStart(COLUMN_WIDTHS.sevenDayRate);
+  const sevenDayProfit = formatUsd(row.sevenDayProfit ?? undefined).padStart(COLUMN_WIDTHS.sevenDayProfit);
   const symbol = row.symbol.padEnd(COLUMN_WIDTHS.symbol);
   return (
     <Box flexDirection="column" marginBottom={1}>
@@ -82,6 +98,8 @@ const LighterHistoryRowItem: React.FC<RowItemProps> = React.memo(({ row }) => {
         <Text>{symbol}</Text>
         <Text color={colorForRate(row.currentRate)}>{current}</Text>
         <Text color={colorForRate(row.averageRate)}>{average}</Text>
+        <Text color={colorForRate(row.sevenDayRate)}>{sevenDayRate}</Text>
+        <Text color="yellow">{sevenDayProfit}</Text>
         {row.series.length ? (
           <Box marginLeft={2}>
             <InlineBarSeries data={row.series} />
@@ -100,6 +118,8 @@ const LighterHistoryRowItem: React.FC<RowItemProps> = React.memo(({ row }) => {
     prev.row.symbol === next.row.symbol &&
     prev.row.currentRate === next.row.currentRate &&
     prev.row.averageRate === next.row.averageRate &&
+    prev.row.sevenDayRate === next.row.sevenDayRate &&
+    prev.row.sevenDayProfit === next.row.sevenDayProfit &&
     prev.row.series === next.row.series
   );
 });

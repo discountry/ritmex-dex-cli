@@ -49,6 +49,32 @@ const average = (values: number[]): number | null => {
   return sum / values.length;
 };
 
+const total = (values: number[]): number | null => {
+  if (!values.length) return null;
+  return values.reduce((sum, value) => sum + value, 0);
+};
+
+const addDerivedFields = (
+  row: Omit<LighterHistoryRow, "sevenDayRate" | "sevenDayProfit">,
+  principalUsd: number
+): LighterHistoryRow => {
+  const series = row.series ?? [];
+  const averageRate = row.averageRate ?? average(series);
+  const latestRate = series.length ? series[series.length - 1] : null;
+  const currentRate = latestRate ?? row.currentRate ?? null;
+  const sevenDayRate = total(series);
+  const sevenDayProfit =
+    sevenDayRate !== null && principalUsd > 0 ? principalUsd * (sevenDayRate / 100) : null;
+
+  return {
+    ...row,
+    averageRate,
+    currentRate,
+    sevenDayRate,
+    sevenDayProfit,
+  };
+};
+
 const dedupeMarkets = (markets: { marketId: number; symbol: string; currentRate: number | null }[]) => {
   const seen = new Set<string>();
   return markets.filter((market) => {
@@ -72,11 +98,24 @@ const dedupeRows = (rows: LighterHistoryRow[]): LighterHistoryRow[] => {
 const filterExcludedRows = (rows: LighterHistoryRow[]): LighterHistoryRow[] =>
   rows.filter((row) => !LIGHTER_EXCLUDED_SYMBOLS.has(row.symbol.toUpperCase()));
 
-export const useLighterFundingHistory = (): LighterHistoryState => {
+export const useLighterFundingHistory = (principalUsd: number = 1000): LighterHistoryState => {
   const [state, setState] = useState<LighterHistoryState>(() => {
     if (INITIAL_SNAPSHOT) {
       return {
-        rows: filterExcludedRows(dedupeRows(INITIAL_SNAPSHOT.rows)),
+        rows: filterExcludedRows(
+          dedupeRows(INITIAL_SNAPSHOT.rows).map((row) =>
+            addDerivedFields(
+              {
+                marketId: row.marketId,
+                symbol: row.symbol,
+                currentRate: row.currentRate,
+                averageRate: row.averageRate,
+                series: row.series,
+              },
+              principalUsd
+            )
+          )
+        ),
         isRefreshing: false,
         error: null,
         lastUpdated: new Date(INITIAL_SNAPSHOT.lastUpdated),
@@ -120,15 +159,19 @@ export const useLighterFundingHistory = (): LighterHistoryState => {
 
           const series = buildSeries(fundings);
           const averageRate = average(series);
-          const currentRate = (market.currentRate ?? (series.length ? series[series.length - 1] : null)) ?? null;
 
-          rows.push({
-            marketId: market.marketId,
-            symbol: market.symbol,
-            currentRate,
-            averageRate,
-            series,
-          });
+          rows.push(
+            addDerivedFields(
+              {
+                marketId: market.marketId,
+                symbol: market.symbol,
+                currentRate: market.currentRate,
+                averageRate,
+                series,
+              },
+              principalUsd
+            )
+          );
           setState({
             rows: filterExcludedRows([...rows]),
             error: failures.length ? `Partial data: ${failures.join("; ")}` : null,
@@ -162,7 +205,7 @@ export const useLighterFundingHistory = (): LighterHistoryState => {
     } finally {
       inFlightRef.current = false;
     }
-  }, []);
+  }, [principalUsd]);
 
   useEffect(() => {
     let cancelled = false;
