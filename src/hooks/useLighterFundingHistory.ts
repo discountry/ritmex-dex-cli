@@ -4,6 +4,7 @@ import {
   fetchLighterMarkets,
   type FundingHistoryParams,
 } from "../services/http/lighter-history";
+import { fetchBinanceUsdtPairs } from "../services/http/binance";
 import {
   LIGHTER_HISTORY_COUNT_BACK,
   LIGHTER_HISTORY_FETCH_GAP_MS,
@@ -105,6 +106,37 @@ const dedupeRows = (rows: LighterHistoryRow[]): LighterHistoryRow[] => {
 const filterExcludedRows = (rows: LighterHistoryRow[]): LighterHistoryRow[] =>
   rows.filter((row) => !LIGHTER_EXCLUDED_SYMBOLS.has(row.symbol.toUpperCase()));
 
+const formatErrorMessage = (failures: string[], binanceError: string | null): string | null => {
+  const parts: string[] = [];
+  if (binanceError) {
+    parts.push(binanceError);
+  }
+
+  if (failures.length) {
+    parts.push(`Partial data: ${failures.join("; ")}`);
+  }
+
+  return parts.length ? parts.join(" | ") : null;
+};
+
+const binanceSymbolCandidates = (symbol: string): string[] => {
+  const normalized = symbol.toUpperCase();
+  const candidates = new Set<string>([normalized]);
+  if (!normalized.endsWith("USDT")) {
+    candidates.add(`${normalized}USDT`);
+  }
+  if (normalized.endsWith("USD") && !normalized.endsWith("USDT")) {
+    candidates.add(`${normalized.slice(0, -3)}USDT`);
+  }
+  if (normalized.endsWith("USDC")) {
+    candidates.add(`${normalized.slice(0, -4)}USDT`);
+  }
+  return Array.from(candidates);
+};
+
+const hasBinanceUsdtPair = (symbol: string, pairs: Set<string>) =>
+  binanceSymbolCandidates(symbol).some((candidate) => pairs.has(candidate));
+
 export const useLighterFundingHistory = (principalUsd: number = 1000): LighterHistoryState => {
   const [state, setState] = useState<LighterHistoryState>(() => {
     if (INITIAL_SNAPSHOT) {
@@ -139,9 +171,25 @@ export const useLighterFundingHistory = (principalUsd: number = 1000): LighterHi
     setState((prev) => ({ ...prev, isRefreshing: true, error: null }));
 
     try {
-      const markets = dedupeMarkets(await fetchLighterMarkets());
+      let binanceError: string | null = null;
+      let binanceUsdtPairs: Set<string> | null = null;
+      try {
+        binanceUsdtPairs = await fetchBinanceUsdtPairs();
+      } catch (error) {
+        binanceError = (error as Error).message;
+      }
+
+      const rawMarkets = dedupeMarkets(await fetchLighterMarkets());
+      const markets = binanceUsdtPairs
+        ? rawMarkets.filter((market) => hasBinanceUsdtPair(market.symbol, binanceUsdtPairs))
+        : rawMarkets;
+
       if (!markets.length) {
-        setState((prev) => ({ ...prev, error: "No lighter markets available", isRefreshing: false }));
+        setState((prev) => ({
+          ...prev,
+          error: formatErrorMessage([], binanceError) ?? "No lighter markets available",
+          isRefreshing: false,
+        }));
         inFlightRef.current = false;
         return;
       }
@@ -181,7 +229,7 @@ export const useLighterFundingHistory = (principalUsd: number = 1000): LighterHi
           );
           setState({
             rows: filterExcludedRows([...rows]),
-            error: failures.length ? `Partial data: ${failures.join("; ")}` : null,
+            error: formatErrorMessage(failures, binanceError),
             isRefreshing: true,
             lastUpdated: state.lastUpdated,
           });
@@ -195,7 +243,7 @@ export const useLighterFundingHistory = (principalUsd: number = 1000): LighterHi
 
       setState({
         rows: filterExcludedRows(rows),
-        error: failures.length ? `Partial data: ${failures.join("; ")}` : null,
+        error: formatErrorMessage(failures, binanceError),
         isRefreshing: false,
         lastUpdated: new Date(),
       });
