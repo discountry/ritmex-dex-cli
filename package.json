@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "bun run index.tsx -- --capital 1000",
-    "lighter-history": "bun run lighter-history.tsx"
+    "lighter-history": "bun run lighter-history.tsx -- --capital 2000"
   },
   "devDependencies": {
     "@types/bun": "latest"
